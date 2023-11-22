@@ -31,6 +31,16 @@
             
             </div>
           </li>
+          <li class="nav-item dropdown list-items mr-1">
+            <a href="#" id="dashboardDropdown" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="ml-lg-2">Products</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
+              <a class="nav-link pl-lg-2" href="{{ route('product.add') }}"><span class="ml-1">Add Product</span></a>
+              <a class="nav-link pl-lg-2" href=""><span class="ml-1">Product List</span></a>
+            
+            </div>
+          </li>
           
        
         </ul>

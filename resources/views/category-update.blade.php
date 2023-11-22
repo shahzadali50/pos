@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('content')
 <div class="row">
     <div class="col-md-8 col-12">
@@ -14,7 +14,7 @@
                                 <label for="simpleinput">Add Catogory</label>
                                 <input type="text" name="category" class="form-control" value="{{ $Category->category }}" placeholder="Add Catogory" required>
                             </div>
-                           
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -25,9 +25,8 @@
                                 </select>
                             </div>
                         </div>
+                      
                         <div class="col-12">
-                          
-                            <button type="reset" class="btn mb-2 btn-warning">Reset</button>
                             <button type="submit" class="btn mb-2 btn-info">Update</button>
                         </div>
                     </div>
@@ -37,5 +36,5 @@
     </div>
 </div>
 
-    
+
 @endsection

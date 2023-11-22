@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('content')
 <div class="row">
     <div class="col-md-8 col-12">
@@ -26,7 +26,6 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="reset" class="btn mb-2 btn-warning">Reset</button>
                             <button type="submit" class="btn mb-2 btn-info">Update</button>
                         </div>
                     </div>

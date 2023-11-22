@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
@@ -29,6 +30,9 @@ Route::get('/brand/list', [BrandController::class, 'list'])->name('brand.list');
 Route::delete('/brand-delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 Route::get('/brand/edit/{id}', [BrandController::class, 'BrandEdit'])->name('brand.edit');
 Route::post('/brand/update/{id}', [BrandController::class, 'BrandUpdate'])->name('brand.update');
+// Product Route ⭐⭐
+Route::get('/product', [ProductController::class, 'product'])->name('product.add');
+Route::post('/product/insert', [ProductController::class, 'insert'])->name('product.insert');
 
 
 
