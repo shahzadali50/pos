@@ -20,7 +20,7 @@ class BrandController extends Controller
     public function list(){
         $brand = Brand::get();
         return view ('brand-list',['brand'=>$brand]);
-       
+
     }
     // delete
     public function delete($id){
@@ -35,7 +35,7 @@ class BrandController extends Controller
     // return "Brand with ID {$id} has been deleted.";
     flashy()->error('brand will be Deleted Successfully. ✅', '#');
     return redirect()->route('brand.list');
-    } 
+    }
     else {
     return "Brand with ID {$id} not found.";
      }
@@ -52,26 +52,26 @@ class BrandController extends Controller
 //    BrandUpdate
    public function BrandUpdate(Request $request,$id){
     $request->validate([
-        'brand' => 'required|string',
+        'name' => 'required|string',
             'status' => 'required|in:1,0',
    ]);
    $Brand = Brand::find($id);
    if($Brand){
     $Brand->update([
 
-        'brand'=>$request->input('brand'),
+        'name'=>$request->input('name'),
         'status'=>$request->input('status')
    ]);
     flashy()->info('Brand will be Updated Successfully. ✅', '#');
     return redirect()->route('brand.list');
    }
-   else 
+   else
    {
             flashy()->error('Some Error Occur. ✅', '#');
             return redirect()->route('brand');
     }
 
-     
+
 }
 }
 

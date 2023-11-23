@@ -25,13 +25,13 @@
                                     @foreach ($Category as $Category_list )
                                     <tr>
                                         <th scope="row">{{$Category_list->id }}</th>
-                                        <td>{{$Category_list->category}}</td>
+                                        <td>{{$Category_list->name}}</td>
                                         <td>{{$Category_list->status}}</td>
                                         <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span class="text-muted sr-only">Action</span>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                               
+
                                               <form action="{{ route('category.updateForm',['id' => $Category_list->id]) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
@@ -43,7 +43,7 @@
 
                                                     <button type="submit" class="btn btn-light dropdown-item text-danger" >Delete</button>
                                                 </form>
-            
+
                                             </div>
                                         </td>
 

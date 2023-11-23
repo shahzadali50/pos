@@ -18,7 +18,7 @@
             <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
               <a class="nav-link pl-lg-2" href="{{ route('category')}}"><span class="ml-1">Add Category</span></a>
               <a class="nav-link pl-lg-2" href="{{ route('category.list')}}"><span class="ml-1">Category List</span></a>
-            
+
             </div>
           </li>
           <li class="nav-item dropdown list-items mr-1">
@@ -28,7 +28,7 @@
             <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
               <a class="nav-link pl-lg-2" href="{{ route('brand') }}"><span class="ml-1">Add Brand</span></a>
               <a class="nav-link pl-lg-2" href="{{ route('brand.list') }}"><span class="ml-1">Brand List</span></a>
-            
+
             </div>
           </li>
           <li class="nav-item dropdown list-items mr-1">
@@ -37,12 +37,12 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
               <a class="nav-link pl-lg-2" href="{{ route('product.add') }}"><span class="ml-1">Add Product</span></a>
-              <a class="nav-link pl-lg-2" href=""><span class="ml-1">Product List</span></a>
-            
+              <a class="nav-link pl-lg-2" href="{{ route('product.list') }}"><span class="ml-1">Product List</span></a>
+
             </div>
           </li>
-          
-       
+
+
         </ul>
       </div>
       {{-- <form class="form-inline ml-md-auto d-none d-lg-flex searchform text-muted">
@@ -69,7 +69,7 @@
           <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="avatar avatar-sm mt-2">
               <img src="{{ asset('img/logo/user.png') }}" alt="not-show" class="avatar-img rounded-circle">
-              
+
             </span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">

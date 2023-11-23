@@ -25,7 +25,7 @@
                                     @foreach ($brand as $brand_list )
                                     <tr>
                                         <th scope="row">{{$brand_list->id }}</th>
-                                        <td>{{$brand_list->brand}}</td>
+                                        <td>{{$brand_list->name}}</td>
                                         <td>{{$brand_list->status}}</td>
                                         <td>
                                             <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,11 +36,11 @@
                                                 <form action="{{ route('brand.delete',['id'=>$brand_list->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                  
+
 
                                                     <button type="submit" class="btn btn-light dropdown-item text-danger" >Delete</button>
                                                 </form>
-            
+
                                             </div>
                                         </td>
 

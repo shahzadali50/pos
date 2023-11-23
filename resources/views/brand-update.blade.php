@@ -12,7 +12,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Add Brand</label>
-                                <input type="text" value="{{ $Brand->brand }}" name="brand" class="form-control" placeholder="Add Brand" required>
+                                <input type="text" value="{{ $Brand->name }}" name="name" class="form-control" placeholder="Add Brand" required>
                             </div>
 
                         </div>

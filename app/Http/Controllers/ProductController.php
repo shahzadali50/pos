@@ -1,19 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Brand;
 
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function product(){
+    public function product()
+    {
         $categories = Category::all();
         $brand = Brand::all();
-        return view("product-add",compact("categories",'brand'));
+        return view("product-add", compact("categories", 'brand'));
     }
 
     public function insert(Request $request)
@@ -21,12 +24,12 @@ class ProductController extends Controller
         $request->validate([
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $filePath='';
+        $filePath = '';
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $fileName =uniqid('img').'.'.$file->getClientOriginalExtension();
-            $filePath = $file->storeAs('uploads/products',$fileName,'public');
+            $fileName = uniqid('img') . '.' . $file->getClientOriginalExtension();
+            $filePath = $file->storeAs('uploads/products', $fileName, 'public');
         }
 
         $product = Product::create([
@@ -38,11 +41,85 @@ class ProductController extends Controller
             'purchase_rate' => $request->input('purchase_rate'),
             'sale_rate' => $request->input('sale_rate'),
             'description' => $request->input('description'),
-            'photo'=>$filePath,
+            'photo' => $filePath,
         ]);
         flashy()->info('Products will be Added Successfully. ✅', '#');
 
-           return redirect()->route('product.add');
+        return redirect()->route('product.add');
+    }
+    // list
+            public function list()
+        {
+            $products = Product::all();
+            return view('product-list', compact('products'));
+        }
+        // delete
+        public function delete($id){
+
+            $product = Product::find($id);
+
+    if ($product) {
+        // Delete the product photo if it exists
+        if ($product->photo) {
+            Storage::disk('public')->delete($product->photo);
+        }
+
+        // Delete the product
+        $product->delete();
+
+        flashy()->error('Product deleted successfully. ✅', '#');
+    } else {
+        flashy()->error('Product not found. ❌', '#');
     }
 
-}
+    return redirect()->route('product.list');
+
+        }
+
+        // edit
+        public function edit($id){
+            $product = Product::find($id);
+
+            if ($product) {
+                $categories = Category::all();
+                $brands = Brand::all();
+
+                return view('product-update', compact('product', 'categories', 'brands'));
+            } else {
+                flashy()->error('Product not found. ❌', '#');
+                return redirect()->route('product-add');
+            }
+        }
+
+
+            public function update(Request $request, $id)
+                        {
+                            $product = Product::find($id);
+
+                            if ($product) {
+                                $request->validate([
+                                    'name' => 'required|string|max:255',
+                                    'category_id' => 'required',
+                                    'brand_id' => 'required',
+                                    'code' => 'required|numeric',
+                                    'quantity' => 'required|numeric',
+                                    'purchase_rate' => 'required|numeric',
+                                    'sale_rate' => 'required|numeric',
+                                    'description' => 'nullable|string',
+                                    'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+                                ]);
+
+                                // Update the product
+                                $product->update($request->all());
+
+                                flashy()->info('Product updated successfully. ✅', '#');
+                            }
+                            else {
+                                flashy()->error('Product not found. ❌', '#');
+                            }
+
+                            return redirect()->route('product.list');
+                        }
+
+
+                    }

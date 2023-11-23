@@ -12,9 +12,9 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Add Catogory</label>
-                                <input type="text" name="category" class="form-control" placeholder="Add Catogory" required>
+                                <input type="text" name="name" class="form-control" placeholder="Add Catogory" required>
                             </div>
-                           
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">

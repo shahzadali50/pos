@@ -16,23 +16,23 @@ class CategoryController extends Controller
     // insert
     public function insert(Request $request){
         Category::create($request->all());
-        // return $request;  
+        // return $request;
         flashy()->info('Category will be Added Successfully. ✅', '#');
         return redirect()->route('category');
-    }  
+    }
     // list
     public function list(){
        $Category= Category::get();
     //    return   $Category;
        return view('catogories-list',['Category'=> $Category]);
-    } 
-    // delete 
+    }
+    // delete
     public function delete($id){
      Category::find($id)->delete();
      flashy()->error('Record will be Deleted Successfully. ✅', '#');
     return redirect()->route('category.list');
-    }  
-    
+    }
+
     // CategoryUpdateForm
     public function CategoryUpdateForm($id)
     {
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function CategoryUpdatedRecord(Request $request, $id)
     {
         $request->validate([
-            'category' => 'required|string',
+            'name' => 'required|string',
             'status' => 'required|in:1,0',
         ]);
 
@@ -55,13 +55,13 @@ class CategoryController extends Controller
 
         if ($category) {
             $category->update([
-                'category' => $request->input('category'),
+                'name' => $request->input('name'),
                 'status' => $request->input('status'),
             ]);
             flashy()->info('Category will be Updated Successfully. ✅', '#');
 
             return redirect()->route('category.list');
-        } 
+        }
         else {
             flashy()->error('Some Error Occur. ✅', '#');
             return redirect()->route('category');
@@ -72,4 +72,4 @@ class CategoryController extends Controller
 
 
 
-     
+
