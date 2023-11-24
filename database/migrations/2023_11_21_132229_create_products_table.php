@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->integer('quantity');
             $table->decimal('purchase_rate', 10, 2);
             $table->decimal('sale_rate', 10, 2);

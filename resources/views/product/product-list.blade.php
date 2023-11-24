@@ -43,9 +43,9 @@
                                         <td>{{$product_list->description}}</td>
                                         <td>
                                             @if($product_list->photo)
-                                                <img src="{{ asset('storage/' . $product_list->photo) }}" alt="Product Photo" style="max-width: 100px; max-height: 100px;">
+                                            <img src="{{ asset('storage/' . $product_list->photo) }}" alt="Product Photo" style="max-width: 90px; max-height: 90px;">
                                             @else
-                                                No Photo
+                                            No Photo
                                             @endif
                                         </td>
                                         <td>
@@ -57,19 +57,18 @@
                                                 <form action="{{ route('product.delete',['id'=>$product_list->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-light dropdown-item text-danger" >Delete</button>
+                                                    <button type="submit" class="btn btn-light dropdown-item text-danger">Delete</button>
                                                 </form>
+                                                <a href="{{ route('product.stock',[$product_list->id]) }}" class="btn btn-light dropdown-item" id="stock">
+                                                    Add Stock
+                                                </a>
 
                                             </div>
                                         </td>
 
-
-
-
                                     </tr>
 
                                     @endforeach
-
 
                                 </tbody>
                             </table>
@@ -81,5 +80,42 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Stock</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
 
-@endsection
+                        <h5> Product Name </h5>
+                        <h5 class="text-secondary">{{$product->name }}</</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="">
+
+                            <div class="form-group mb-3">
+                                <label for="simpleinput">Add Stock</label>
+                                <input type="number" name="quantity" class="form-control" placeholder="Add Stock" required>
+                                <button class="btn mt-2 btn-info">Add</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+            {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div> --}}
+        </div>
+    </div>
+</div @endsection

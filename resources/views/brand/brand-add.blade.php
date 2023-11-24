@@ -12,8 +12,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="simpleinput">Add Brand</label>
-                                <input type="text" name="name" class="form-control" placeholder="Add Brand" required>
+                                <label for="simpleinput">Brand Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Brand Name" required>
                             </div>
 
                         </div>

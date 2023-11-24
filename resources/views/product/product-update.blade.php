@@ -56,7 +56,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Quantity</label>
-                                <input name="quantity" value="{{ $product->quantity }}" type="number" class="form-control" placeholder="Quantity" required>
+                                <input readonly name="quantity" value="{{ $product->quantity }}" type="number" class="form-control" placeholder="Quantity" required>
                             </div>
 
                         </div>
@@ -74,15 +74,11 @@
                             </div>
 
                         </div>
-
-
-                        <!-- Add other form fields as needed -->
-
-                        <div class="col-md-6">
+                          <div class="col-md-6">
                             <label for="simpleinput">Drop files here, paste or browse</label>
                             <input name="photo" type="file" class="form-control mb-3" accept="image/*">
                             @if($product->photo)
-                            <p>Current Photo:</p>
+                            <p>Previous Photo:</p>
                             <img src="{{ asset('storage/' . $product->photo) }}" alt="Product Photo" style="max-width: 100px; max-height: 100px;">
                             @else
                             <p>No photo available</p>
@@ -98,7 +94,7 @@
 
                         <div class="col-12">
 
-                            <button type="submit" class="btn mb-2 btn-info">Update Product</button>
+                            <button type="submit" class="btn mb-2 btn-info">Update</button>
                         </div>
                     </div>
                 </form>

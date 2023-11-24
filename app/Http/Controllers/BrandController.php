@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class BrandController extends Controller
 {
     public function brand(){
-        return view('brand-add');
+        return view('brand.brand-add');
     }
     // insert
     public function insert(Request $request){
@@ -19,7 +19,7 @@ class BrandController extends Controller
     }
     public function list(){
         $brand = Brand::get();
-        return view ('brand-list',['brand'=>$brand]);
+        return view ('brand.brand-list',['brand'=>$brand]);
 
     }
     // delete
@@ -44,7 +44,7 @@ class BrandController extends Controller
    public function BrandEdit($id){
       $Brand =  Brand::find($id);
     //   return  $update;
-    return view('brand-update', ['Brand'=> $Brand]);
+    return view('brand.brand-update', ['Brand'=> $Brand]);
 
 
 

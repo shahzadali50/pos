@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function Catogory_Add()
     {
-        return view('categories-add');
+        return view('category.categories-add');
     }
     // insert
     public function insert(Request $request){
@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function list(){
        $Category= Category::get();
     //    return   $Category;
-       return view('catogories-list',['Category'=> $Category]);
+       return view('category.catogories-list',['Category'=> $Category]);
     }
     // delete
     public function delete($id){
@@ -39,7 +39,7 @@ class CategoryController extends Controller
         $Category = Category::find($id);
         // return $category;
 
-        return view('category-update', ['Category'=> $Category]);
+        return view('category.category-update', ['Category'=> $Category]);
     }
 
     // CategoryUpdatedRecord

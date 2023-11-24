@@ -16,13 +16,13 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brand = Brand::all();
-        return view("product-add", compact("categories", 'brand'));
+        return view("product.product-add", compact("categories", 'brand'));
     }
 
     public function insert(Request $request)
     {
         $request->validate([
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
         ]);
         $filePath = '';
 
@@ -47,11 +47,11 @@ class ProductController extends Controller
 
         return redirect()->route('product.add');
     }
-    // list
+           // list
             public function list()
         {
             $products = Product::all();
-            return view('product-list', compact('products'));
+            return view('product.product-list', compact('products'));
         }
         // delete
         public function delete($id){
@@ -68,7 +68,9 @@ class ProductController extends Controller
         $product->delete();
 
         flashy()->error('Product deleted successfully. ✅', '#');
-    } else {
+    }
+
+    else {
         flashy()->error('Product not found. ❌', '#');
     }
 
@@ -84,7 +86,7 @@ class ProductController extends Controller
                 $categories = Category::all();
                 $brands = Brand::all();
 
-                return view('product-update', compact('product', 'categories', 'brands'));
+                return view('product.product-update', compact('product', 'categories', 'brands'));
             } else {
                 flashy()->error('Product not found. ❌', '#');
                 return redirect()->route('product-add');
@@ -92,34 +94,63 @@ class ProductController extends Controller
         }
 
 
-            public function update(Request $request, $id)
-                        {
-                            $product = Product::find($id);
+        public function update(Request $request, $id)
+        {
+            $product = Product::find($id);
 
-                            if ($product) {
-                                $request->validate([
-                                    'name' => 'required|string|max:255',
-                                    'category_id' => 'required',
-                                    'brand_id' => 'required',
-                                    'code' => 'required|numeric',
-                                    'quantity' => 'required|numeric',
-                                    'purchase_rate' => 'required|numeric',
-                                    'sale_rate' => 'required|numeric',
-                                    'description' => 'nullable|string',
-                                    'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
-                                ]);
+            if ($product) {
+                $request->validate([
+                    'name' => 'required|string|max:255',
+                    'category_id' => 'required',
+                    'brand_id' => 'required',
+                    'code' => 'required|numeric',
+                    'quantity' => 'required|numeric',
+                    'purchase_rate' => 'required|numeric',
+                    'sale_rate' => 'required|numeric',
+                    'description' => 'nullable|string',
+                    'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+                ]);
 
-                                // Update the product
-                                $product->update($request->all());
-
-                                flashy()->info('Product updated successfully. ✅', '#');
-                            }
-                            else {
-                                flashy()->error('Product not found. ❌', '#');
-                            }
-
-                            return redirect()->route('product.list');
-                        }
-
-
+                // Check if a new photo is provided
+                if ($request->hasFile('photo')) {
+                    // Delete the old photo if it exists
+                    if ($product->photo) {
+                        Storage::disk('public')->delete($product->photo);
                     }
+
+                    // Upload and save the new photo
+                    $file = $request->file('photo');
+                    $fileName = uniqid('img') . '.' . $file->getClientOriginalExtension();
+                    $filePath = $file->storeAs('uploads/products', $fileName, 'public');
+
+                    // Update the product with the new photo path
+                    $product->update([
+                        'name' => $request->input('name'),
+                        'category_id' => $request->input('category_id'),
+                        'brand_id' => $request->input('brand_id'),
+                        'code' => $request->input('code'),
+                        'quantity' => $request->input('quantity'),
+                        'purchase_rate' => $request->input('purchase_rate'),
+                        'sale_rate' => $request->input('sale_rate'),
+                        'description' => $request->input('description'),
+                        'photo' => $filePath,
+                    ]);
+                } else {
+                    // Update the product without changing the photo
+                    $product->update($request->except('photo'));
+                }
+
+                flashy()->info('Product updated successfully. ✅', '#');
+            } else {
+                flashy()->error('Product not found. ❌', '#');
+            }
+
+            return redirect()->route('product.list');
+        }
+
+        public function stock($id){
+            $product = Product::find($id);
+            dd($product);
+            return view('product.product-list',compact('product'));
+        }
+    }

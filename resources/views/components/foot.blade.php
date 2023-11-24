@@ -37,4 +37,9 @@
 <script src="{{url('js/apps.js')}}"></script>
 <script src="{{url('js/custom.js')}}"></script>
 <script src="{{url('js/panel.js')}}"></script>
+<script>
+    $('#stock').on('click', function () {
+        $('#staticBackdrop').modal('show');
+    });
+</script>
 @include('flashy::message')

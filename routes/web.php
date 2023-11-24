@@ -30,6 +30,7 @@ Route::get('/brand/list', [BrandController::class, 'list'])->name('brand.list');
 Route::delete('/brand-delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 Route::get('/brand/edit/{id}', [BrandController::class, 'BrandEdit'])->name('brand.edit');
 Route::post('/brand/update/{id}', [BrandController::class, 'BrandUpdate'])->name('brand.update');
+
 // Product Route ⭐⭐
 Route::get('/product', [ProductController::class, 'product'])->name('product.add');
 Route::post('/product/insert', [ProductController::class, 'insert'])->name('product.insert');
@@ -37,6 +38,7 @@ Route::get('/product/list', [ProductController::class, 'list'])->name('product.l
 Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::get('/product/{id}/stock', [ProductController::class, 'stock'])->name('product.stock');
 
 
 
