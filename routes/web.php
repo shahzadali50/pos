@@ -38,7 +38,7 @@ Route::get('/product/list', [ProductController::class, 'list'])->name('product.l
 Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
-Route::get('/product/{id}/stock', [ProductController::class, 'stock'])->name('product.stock');
+Route::post('/product/add/stock', [ProductController::class, 'AddStock'])->name('add.stock');
 
 
 

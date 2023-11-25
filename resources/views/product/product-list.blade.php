@@ -32,12 +32,12 @@
                                 <tbody>
                                     @foreach ($products as $product_list )
                                     <tr>
-                                        <th scope="row">{{$product_list->id }}</th>
+                                        <th scope="row" >{{$product_list->id }}</th>
                                         <td>{{$product_list->name }}</td>
                                         <td>{{$product_list->category->name}}</td>
                                         <td>{{$product_list->brand->name}}</td>
                                         <td>{{$product_list->code}}</td>
-                                        <td>{{$product_list->quantity}}</td>
+                                        <td data-product-id="{{$product_list->id}}">{{$product_list->quantity}}</td>
                                         <td>{{$product_list->purchase_rate}}</td>
                                         <td>{{$product_list->sale_rate}}</td>
                                         <td>{{$product_list->description}}</td>
@@ -52,14 +52,15 @@
                                             <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span class="text-muted sr-only">Action</span>
                                             </button>
+
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="{{ route('product.edit',['id'=>$product_list->id]) }}" class="btn btn-light dropdown-item">Update</a>
                                                 <form action="{{ route('product.delete',['id'=>$product_list->id]) }}" method="POST">
-                                                    @csrf
+                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-light dropdown-item text-danger">Delete</button>
                                                 </form>
-                                                <a href="{{ route('product.stock',[$product_list->id]) }}" class="btn btn-light dropdown-item" id="stock">
+                                                <a href="#" onclick="addStock(`{{$product_list->name}}`,`{{ $product_list->id }}`)" class="btn btn-light dropdown-item">
                                                     Add Stock
                                                 </a>
 
@@ -94,15 +95,18 @@
                     <div class="col-md-6">
 
                         <h5> Product Name </h5>
-                        <h5 class="text-secondary">{{$product->name }}</</h5>
+                        <h5 class="text-secondary" id="pro_name"> </h5>
+
                     </div>
                     <div class="col-md-6">
-                        <form action="">
+                        <form id="addStockForm"  action="{{ route('add.stock') }}" method="POST">
+                            @csrf
 
                             <div class="form-group mb-3">
+                                <input type="text" name="product_id" id="pro_id" value="" hidden>
                                 <label for="simpleinput">Add Stock</label>
                                 <input type="number" name="quantity" class="form-control" placeholder="Add Stock" required>
-                                <button class="btn mt-2 btn-info">Add</button>
+                                <button id="submitForm" type="submit" class="btn mt-2 btn-info">Add</button>
                             </div>
                         </form>
 
@@ -112,10 +116,75 @@
                 </div>
 
             </div>
-            {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div> --}}
         </div>
     </div>
-</div @endsection
+</div>
+ @endsection
+
+
+@push('js')
+<style>
+    .flashy {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+</style>
+<script>
+    function addStock(name,id){
+        $('#pro_name').text(name);
+        $('#pro_id').val(id);
+        $('#staticBackdrop').modal('show');
+      }
+    //   showFlashMessage
+      function showFlashMessage() {
+        // Create a div element for the flash message
+        var flashMessage = $('<div>').addClass('flashy').text('Stock updated');
+
+        // Append the flash message to the body
+        $('body').append(flashMessage);
+
+        // Remove the flash message after a delay (e.g., 3 seconds)
+        setTimeout(function() {
+            flashMessage.remove();
+        }, 3000);
+    }
+</script>
+    <script>
+
+        $('#submitForm').click(function(e) {
+            var formData = $('#addStockForm').serialize();
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: $('#addStockForm').attr('action'),
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+
+                        $('td[data-product-id="' + response.id + '"]').text(response.stock);
+                        $('#staticBackdrop').modal('hide');
+                        showFlashMessage();
+
+                    } else {
+                        // Show an error message
+                        alert('Error: ' + response.error);
+                    }
+                },
+                error: function(error) {
+                    // Handle AJAX errors
+                    console.error('AJAX request failed:', error);
+                }
+            });
+        });
+    </script>
+@endpush
