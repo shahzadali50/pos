@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LoginController;
@@ -39,6 +40,9 @@ Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->nam
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/product/add/stock', [ProductController::class, 'AddStock'])->name('add.stock');
+
+// Order Route ⭐⭐
+Route::get('/order/create', [OrderController::class, 'order'])->name('order.create');
 
 
 

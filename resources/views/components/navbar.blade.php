@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white flex-row border-bottom shadow">
     <div class="container-fluid">
       <a class="navbar-brand mx-lg-1 mr-0" href="./index.html">
-       <img src="{{asset('img/logo/pos_logo.jpg')}}" alt="not-show" class="img-fluid" style="width: 50px">
+       <img src="{{asset('assets/img/logo/pos_logo.jpg')}}" alt="not-show" class="img-fluid" style="width: 50px">
       </a>
       <button class="navbar-toggler mt-2 mr-auto toggle-sidebar text-muted">
         <i class="fe fe-menu navbar-toggler-icon"></i>
@@ -41,6 +41,15 @@
 
             </div>
           </li>
+          <li class="nav-item dropdown list-items mr-1">
+            <a href="#" id="dashboardDropdown" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="ml-lg-2">Orders</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
+              <a class="nav-link pl-lg-2" href="{{ route('order.create') }}"><span class="ml-1">Order Create</span></a>
+
+            </div>
+          </li>
 
 
         </ul>
@@ -68,7 +77,7 @@
         <li class="nav-item dropdown ml-lg-0">
           <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="avatar avatar-sm mt-2">
-              <img src="{{ asset('img/logo/user.png') }}" alt="not-show" class="avatar-img rounded-circle">
+              <img src="{{ asset('assets/img/logo/user.png') }}" alt="not-show" class="avatar-img rounded-circle">
 
             </span>
           </a>
