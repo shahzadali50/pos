@@ -1,16 +1,24 @@
 .navbar ul.navbar-nav li.list-items{
-    background-color: rgba(60, 66, 60, 0.192) !important;
-   
+    background-color: rgba(95, 99, 95, 0.192) !important;
+
 }
-.navbar ul.navbar-nav li.list-items:hover{
-   background-color: aqua;
-   
+
+
+.navbar-light .navbar-nav .nav-link:hover{
+    background-color: rgba(96, 99, 96, 0.075);
+    color: black;
 }
 form .form-control:focus{
     box-shadow: none;
-    
+
 }
 form label{
     color: rgb(0, 26, 78);
     font-size: 15px;
+}
+.select2-results__option:hover
+{
+    background-color: rgba(96, 99, 96, 0.075);
+    cursor: pointer;
+    color: black;
 }

@@ -43,6 +43,8 @@ Route::post('/product/add/stock', [ProductController::class, 'AddStock'])->name(
 
 // Order Route ⭐⭐
 Route::get('/order/create', [OrderController::class, 'order'])->name('order.create');
+Route::get('/get-product-details/{id}', [OrderController::class, 'items']);
+
 
 
 

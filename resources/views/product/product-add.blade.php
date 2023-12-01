@@ -21,7 +21,7 @@
 
 
                                 <label for="Status">Category</label>
-                                <select name="category_id" class="form-control" id="Status">
+                                <select name="category_id" class="form-control category" id="Status">
                                     <option selected disabled>Select Category</option>
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -32,9 +32,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Status">Brand</label>
-                                <select name="brand_id" class="form-control" id="Status">
-                                    <option  selected disabled>Select Brand</option>
-                                    @foreach ($brand as $brand_name  )
+                                <select name="brand_id" class="form-control " id="brand">
+                                    <option selected disabled>Select Brand</option>
+                                    @foreach ($brand as $brand_name )
                                     <option value="{{ $brand_name->id }}">{{$brand_name->name }}</option>
 
                                     @endforeach
@@ -72,7 +72,7 @@
 
                         <div class="col-md-6">
                             <label for="simpleinput">Drop files here, paste or browse</label>
-                            <input name="photo" type="file" class="form-control mb-3"  accept="image/*">
+                            <input name="photo" type="file" class="form-control mb-3" accept="image/*">
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
@@ -94,4 +94,16 @@
 
 @endsection
 
+@push('js')
+<script>
+    $(document).ready(function() {
+        $('.category').select2();
+    });
+    $(document).ready(function() {
+        $('#brand').select2();
+    });
 
+</script>
+
+
+@endpush

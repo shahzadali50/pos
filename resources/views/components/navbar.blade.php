@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white flex-row border-bottom shadow">
     <div class="container-fluid">
-      <a class="navbar-brand mx-lg-1 mr-0" href="./index.html">
+      <a class="navbar-brand mx-lg-1 mr-0" href="{{ route('dashboard') }}">
        <img src="{{asset('assets/img/logo/pos_logo.jpg')}}" alt="not-show" class="img-fluid" style="width: 50px">
       </a>
       <button class="navbar-toggler mt-2 mr-auto toggle-sidebar text-muted">
