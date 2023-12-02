@@ -46,21 +46,21 @@
                         <div class="col-lg-2 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput">code</label>
-                                <input type="number" name="code" class="form-control" required>
+                                <input type="text" readonly name="code" class="form-control" required>
                             </div>
 
                         </div>
                         <div class="col-lg-2 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput">Qty</label>
-                                <input type="number" name="qty" class="form-control" required>
+                                <input type="number"  name="qty"  id="quantityInput" class="form-control" required>
                             </div>
 
                         </div>
                         <div class="col-lg-2 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput"> Price</label>
-                                <input type="number" name="sale_rate" class="form-control" required>
+                                <input type="number" name="sale_rate" id="saleRateInput" class="form-control" required>
                             </div>
 
                         </div>
@@ -92,21 +92,42 @@ $('.items').select2();
 
             // Make Ajax request
             $.ajax({
-                url: '/get-product-details/' + productId
-                , type: 'GET'
-                , success: function(data) {
+                url: '/get-product-details/' + productId,
+                type: 'GET',
+                success: function(data) {
                     // Update the code and sale_rate fields
                     $('input[name="code"]').val(data.code);
+
+                    // Reset the sale_rate input to the original value from the server
                     $('input[name="sale_rate"]').val(data.sale_rate);
-                }
-                , error: function(xhr, status, error) {
+
+                    // Reset the quantity input to 1
+                    $('#quantityInput').val(1);
+                },
+                error: function(xhr, status, error) {
                     console.error('Error fetching product details:', error);
                 }
             });
         });
-    });
 
+        // Listen to changes in the quantity input
+        $('#quantityInput').on('input', function() {
+            var quantity = $(this).val();
+            var saleRateInput = $('#saleRateInput');
+
+            // Fetch the current sale rate from the input or use the default value
+            var originalSaleRate = saleRateInput.val();
+
+            // Calculate the new sale rate based on quantity
+            var newSaleRate = originalSaleRate * quantity;
+
+            // Update the sale rate input with the calculated value
+            saleRateInput.val(newSaleRate);
+        });
+    });
 </script>
+
+
 
 
 
