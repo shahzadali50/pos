@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="{{url('assets/css/sweetalert2.min.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/dataTables.bootstrap4.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
-        
+
         <title>POS</title>
         <style type="text/css">
                 .btn-admin,

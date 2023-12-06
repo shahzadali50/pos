@@ -18,7 +18,7 @@ form label{
 }
 .select2-results__option:hover
 {
-    background-color: rgba(96, 99, 96, 0.075);
+    background-color: rgba(0, 110, 255, 0.719);
     cursor: pointer;
-    color: black;
+    color: white;
 }
