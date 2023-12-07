@@ -31,7 +31,7 @@
                         <div class="col-lg-3 col-sm-3">
                             <div class="form-group">
                                 <label>Items<span class="text-danger">*</span></label>
-                                <select class="form-control items">
+                                <select class="form-control items items_select">
                                     <option selected disabled>Select Items</option>
                                     @foreach ($products as $product )
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -70,7 +70,25 @@
 
                         <div class="col-lg-3 col-12" style="margin-top:30px">
                             <button type="reset" class="btn mb-2 btn-warning mr-2">Reset</button>
-                            <button type="submit" class="btn mb-2 btn-info">Add</button>
+                            <button type="button"  class="btn mb-2 btn-info btn_Add_items">Add</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <table class="table table-bordered">
+                                <thead>
+
+                                    <tr>
+                                        <td>Product name</td>
+                                        <td>Qty</td>
+                                        <td>Price</td>
+                                        <td>Total</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="itemsTable">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </form>
@@ -84,14 +102,30 @@
 @push('js')
 <script>
     $(document).ready(function() {
-        $('.items').select2();
+        $('.items_select').select2();
     });
+    $('.btn_Add_items').click(function() {
+        let prod_id=$('.items_select :selected').val();
+        let prod_name=$('.items_select :selected').text();
+        let prod_qty=$('#quantityInput').val();
+        let prod_price=$('#saleRateInput').val();
+   //alert(prod_id+" "+prod_name+" "+prod_qty+" "+prod_price);
+             $('#itemsTable').append('<tr id="">\
+                                        <td>'+prod_name+'  <input type="text" name="product_id[]" value="'+prod_id+'"/>\
+                                        <input type="text" name="product_qty[]" value="'+prod_qty+'"/>\
+                                        <input type="text" name="product_price[]" value="'+prod_price+'"/></td>\
+                                        <td>'+prod_qty+'</td>\
+                                        <td>'+prod_price+'</td>\
+                                        <td>'+prod_qty*prod_price+'</td>\
+                                    </tr>');
 
+});
 
 
 </script>
 <script>
     $(document).ready(function() {
+
         $('.items').change(function() {
             var productId = $(this).val();
 
