@@ -47,7 +47,7 @@
                         <div class="col-lg-2 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput">code</label>
-                                <input type="text" readonly name="code" class="form-control" required>
+                                <input type="text" name="code" class="form-control" required>
                             </div>
 
                         </div>
@@ -58,7 +58,7 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-2 col-sm-3">
+                        <div class="col-lg-1 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput"> Price</label>
                                 <input type="hidden" name="original_sale_rate" id="originalSaleRateInput" class="form-control">
@@ -66,11 +66,18 @@
                             </div>
 
                         </div>
+                        <div class="col-lg-1 col-sm-3">
+                            <div class="form-group">
+                                <label for="simpleinput"> Total</label>
+                                <input type="number" readonly name="total_price_b" id="total_price_b" class="form-control" required>
+                            </div>
+
+                        </div>
 
 
                         <div class="col-lg-3 col-12" style="margin-top:30px">
                             <button type="reset" class="btn mb-2 btn-warning mr-2">Reset</button>
-                            <button type="button"  class="btn mb-2 btn-info btn_Add_items">Add</button>
+                            <button type="button" class="btn mb-2 btn-info btn_Add_items">Add</button>
                         </div>
                     </div>
                     <div class="row">
@@ -105,22 +112,21 @@
         $('.items_select').select2();
     });
     $('.btn_Add_items').click(function() {
-        let prod_id=$('.items_select :selected').val();
-        let prod_name=$('.items_select :selected').text();
-        let prod_qty=$('#quantityInput').val();
-        let prod_price=$('#saleRateInput').val();
-   //alert(prod_id+" "+prod_name+" "+prod_qty+" "+prod_price);
-             $('#itemsTable').append('<tr id="">\
-                                        <td>'+prod_name+'  <input type="text" name="product_id[]" value="'+prod_id+'"/>\
-                                        <input type="text" name="product_qty[]" value="'+prod_qty+'"/>\
-                                        <input type="text" name="product_price[]" value="'+prod_price+'"/></td>\
-                                        <td>'+prod_qty+'</td>\
-                                        <td>'+prod_price+'</td>\
-                                        <td>'+prod_qty*prod_price+'</td>\
+        let prod_id = $('.items_select :selected').val();
+        let prod_name = $('.items_select :selected').text();
+        let prod_qty = $('#quantityInput').val();
+        let prod_price = $('#saleRateInput').val();
+        // alert(prod_id+" "+prod_name+" "+prod_qty+" "+prod_price);
+        $('#itemsTable').append('<tr id="">\
+                                        <td>' + prod_name + '  <input type="text" name="product_id[]" value="' + prod_id + '"/>\
+                                        <input type="text" name="product_qty[]" value="' + prod_qty + '"/>\
+                                        <input type="text" name="product_price[]" value="' + prod_price + '"/></td>\
+                                        <td>' + prod_qty + '</td>\
+                                        <td>' + prod_price + '</td>\
+                                        <td>' + prod_qty * prod_price + '</td>\
                                     </tr>');
 
-});
-
+    });
 
 </script>
 <script>
@@ -142,6 +148,7 @@
                     $('input[name="sale_rate"]').val(data.sale_rate);
                     // Reset the quantity input to 1
                     $('#quantityInput').val(1);
+                    $('#total_price_b').val(data.sale_rate);
                 }
                 , error: function(xhr, status, error) {
                     console.error('Error fetching product details:', error);
@@ -150,20 +157,23 @@
         });
 
         // Listen to changes in the quantity input
-        $('#quantityInput').on('input', function() {
-            var quantity = $(this).val();
-            var saleRateInput = $('#saleRateInput');
+        $('#quantityInput,#saleRateInput').on('input', function() {
+            var quantity = $('#quantityInput').val();
+            var saleRateInput = $('#saleRateInput').val();
+            let total_price_b = $('#total_price_b');
             var originalSaleRateInput = $('#originalSaleRateInput').val();
 
             // Calculate the new sale rate based on quantity
-            var newSaleRate = originalSaleRateInput * quantity;
+            var newSaleRate = saleRateInput * quantity;
 
             // Update the sale rate input with the calculated value
-            saleRateInput.val(newSaleRate);
+            total_price_b.val(newSaleRate);
         });
     });
 
 </script>
+
+
 
 
 
