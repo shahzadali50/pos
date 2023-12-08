@@ -23,5 +23,16 @@ class OrderController extends Controller
     ]);
 }
 
+public function code($code)
+    {
+        $product = Product::where('code', $code)->first();
+
+        if ($product) {
+            return response()->json(['success' => true, 'data' => $product]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Product not found']);
+        }
+    }
+
 
 }

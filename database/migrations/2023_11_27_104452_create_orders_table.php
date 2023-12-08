@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('c_name');
             $table->string('phone');
             $table->unsignedBigInteger('item_id');
-            $table->string('code')->nullable();
+            $table->string('code')->unique();
             $table->integer('qty')->nullable();
             $table->decimal('sale_rate', 8, 2)->nullable();
             $table->timestamps();
