@@ -31,8 +31,8 @@
                         <div class="col-lg-3 col-sm-3">
                             <div class="form-group">
                                 <label>Items<span class="text-danger">*</span></label>
-                                <select class="form-control items items_select">
-                                    <option selected disabled>Select Items</option>
+                                <select class="form-control items_select">
+                                    {{-- <option selected disabled>Select Items</option> --}}
                                     @foreach ($products as $product )
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
 
@@ -47,7 +47,7 @@
                         <div class="col-lg-2 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput">code</label>
-                                <input type="text" name="code" class="form-control" required>
+                                <input type="text" id="codeInput" name="code" class="form-control" required>
                             </div>
 
                         </div>
@@ -81,15 +81,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-12">
                             <table class="table table-bordered">
                                 <thead>
 
                                     <tr>
-                                        <td>Product name</td>
+                                        <td> Product name</td>
                                         <td>Qty</td>
                                         <td>Price</td>
                                         <td>Total</td>
+                                        <td>Action</td>
                                     </tr>
                                 </thead>
                                 <tbody id="itemsTable">
@@ -117,15 +118,44 @@
         let prod_qty = $('#quantityInput').val();
         let prod_price = $('#saleRateInput').val();
         // alert(prod_id+" "+prod_name+" "+prod_qty+" "+prod_price);
-        $('#itemsTable').append('<tr id="">\
-                                        <td>' + prod_name + '  <input type="text" name="product_id[]" value="' + prod_id + '"/>\
-                                        <input type="text" name="product_qty[]" value="' + prod_qty + '"/>\
-                                        <input type="text" name="product_price[]" value="' + prod_price + '"/></td>\
-                                        <td>' + prod_qty + '</td>\
-                                        <td>' + prod_price + '</td>\
-                                        <td>' + prod_qty * prod_price + '</td>\
-                                    </tr>');
+        // $('#itemsTable').append('<tr id="">\
+        //                                 <td>' + prod_name + '  <input type="text" name="product_id[]" value="' + prod_id + '"/>\
+        //                                 <input type="text" name="product_qty[]" value="' + prod_qty + '"/>\
+        //                                 <input type="text" name="product_price[]" value="' + prod_price + '"/></td>\
+        //                                 <td>' + prod_qty + '</td>\
+        //                                 <td>' + prod_price + '</td>\
+        //                                 <td>' + prod_qty * prod_price + '</td>\
+        //                             </tr>');
 
+        if (prod_id && prod_name && prod_qty && prod_price) {
+            $('#itemsTable').append(`
+                    <tr id="add_items" >/
+
+                        <td>${prod_name}</td>/
+                        <td>${prod_qty}</td>/
+                        <td>${prod_price}</td>/
+                        <td>${prod_qty * prod_price}</td>/
+                        <td><button type="button" class="btn btn-light btn_delete"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></button></td>/
+                        <td><input type="number" name="product_qty[]" value="${prod_qty}"  class="form-control" /></td>/
+                      <td>  <input type="number"  name="product_price[]" value="${prod_price }"  class="form-control" /></td>/
+                    </tr>
+                    <tr>
+
+                     </tr>
+
+                    `);
+            $('.items_select').val('');
+            $('#quantityInput').val('');
+            $('#saleRateInput').val('');
+        } else {
+            alert('Please fill in all required fields.');
+        }
+
+
+    });
+
+    $('.btn_delete').click(function() {
+        $('#add_items').remove();
     });
 
 </script>
