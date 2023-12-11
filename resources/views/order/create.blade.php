@@ -31,8 +31,8 @@
                         <div class="col-lg-3 col-sm-3">
                             <div class="form-group">
                                 <label>Items<span class="text-danger">*</span></label>
-                                <select class="form-control items_select">
-                                    {{-- <option selected disabled>Select Items</option> --}}
+                                <select class="form-control items items_select">
+                                    <option selected disabled>Select Items</option>
                                     @foreach ($products as $product )
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
 
@@ -47,7 +47,7 @@
                         <div class="col-lg-2 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput">code</label>
-                                <input type="text" id="codeInput" name="code" class="form-control" required>
+                                <input type="text" name="code" class="form-control" required>
                             </div>
 
                         </div>
@@ -81,16 +81,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-sm-8">
                             <table class="table table-bordered">
                                 <thead>
 
                                     <tr>
-                                        <td> Product name</td>
+                                        <td>Product name</td>
                                         <td>Qty</td>
                                         <td>Price</td>
                                         <td>Total</td>
-                                        <td>Action</td>
                                     </tr>
                                 </thead>
                                 <tbody id="itemsTable">
@@ -151,9 +150,7 @@
             alert('Please fill in all required fields.');
         }
 
-
     });
-
     $('.btn_delete').click(function() {
         $('#add_items').remove();
     });
