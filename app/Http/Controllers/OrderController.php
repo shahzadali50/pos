@@ -24,6 +24,20 @@ class OrderController extends Controller
             'sale_rate' => $product->sale_rate,
         ]);
     }
+    public function itemsByCode($code)
+    {
+        $product = Product::where('code', $code)->first();
+
+        if ($product) {
+            return response()->json([
+                'id' => $product->id,
+                'code' => $product->code,
+                'sale_rate' => $product->sale_rate,
+            ]);
+        } else {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+    }
 }
 
 

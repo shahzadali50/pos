@@ -44,14 +44,14 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-2 col-sm-3">
+                        <div class="col-lg-2 col-sm-2">
                             <div class="form-group">
                                 <label for="simpleinput">code</label>
                                 <input type="text" name="code" class="form-control" required>
                             </div>
 
                         </div>
-                        <div class="col-lg-2 col-sm-3">
+                        <div class="col-lg-2 col-sm-1">
                             <div class="form-group">
                                 <label for="simpleinput">Qty</label>
                                 <input type="number" name="qty" id="quantityInput" class="form-control" required>
@@ -69,7 +69,7 @@
                         <div class="col-lg-1 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput"> Total</label>
-                                <input type="number" readonly name="total_price_b" id="total_price_b" class="form-control" required>
+                                <input  type="number" readonly name="total_price_b" id="total_price_b" class="form-control" required>
                             </div>
 
                         </div>
@@ -117,30 +117,20 @@
         let prod_qty = $('#quantityInput').val();
         let prod_price = $('#saleRateInput').val();
         // alert(prod_id+" "+prod_name+" "+prod_qty+" "+prod_price);
-        // $('#itemsTable').append('<tr id="">\
-        //                                 <td>' + prod_name + '  <input type="text" name="product_id[]" value="' + prod_id + '"/>\
-        //                                 <input type="text" name="product_qty[]" value="' + prod_qty + '"/>\
-        //                                 <input type="text" name="product_price[]" value="' + prod_price + '"/></td>\
-        //                                 <td>' + prod_qty + '</td>\
-        //                                 <td>' + prod_price + '</td>\
-        //                                 <td>' + prod_qty * prod_price + '</td>\
-        //                             </tr>');
 
         if (prod_id && prod_name && prod_qty && prod_price) {
             $('#itemsTable').append(`
-                    <tr id="add_items" >/
+                    <tr id="add_items_${prod_id}" >/
 
                         <td>${prod_name}</td>/
                         <td>${prod_qty}</td>/
                         <td>${prod_price}</td>/
                         <td>${prod_qty * prod_price}</td>/
-                        <td><button type="button" class="btn btn-light btn_delete"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></button></td>/
+                        <td><button type="button" onclick="removeIt(${prod_id})" value='' class="btn btn-light btn_delete"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></button></td>/
                         <td><input type="number" name="product_qty[]" value="${prod_qty}"  class="form-control" /></td>/
                       <td>  <input type="number"  name="product_price[]" value="${prod_price }"  class="form-control" /></td>/
                     </tr>
-                    <tr>
 
-                     </tr>
 
                     `);
             $('.items_select').val('');
@@ -151,9 +141,15 @@
         }
 
     });
-    $('.btn_delete').click(function() {
-        $('#add_items').remove();
-    });
+    function removeIt(id) {
+        $('#add_items_'+id).remove();
+    }
+    // $('.btn_delete').click(function() {
+    //     alert(val);
+    //     let val=$(this).val();
+
+
+    // });
 
 </script>
 <script>
@@ -182,6 +178,31 @@
                 }
             });
         });
+
+         // Listen to changes in the code input
+    $('input[name="code"]').on('input', function() {
+        // Fetch items and sale rate when a value is entered into the code input
+        var enteredCode = $(this).val();
+
+        // Make Ajax request to fetch item details based on the entered code
+        $.ajax({
+            url: '/get-product-details-by-code/' + enteredCode,
+            type: 'GET',
+            success: function(data) {
+                // $('.items').val(data.id).change();
+                $('.items').val(data.id).trigger('change');
+
+                $('input[name="original_sale_rate"]').val(data.sale_rate);
+                $('input[name="sale_rate"]').val(data.sale_rate);
+                // Reset the quantity input to 1
+                $('#quantityInput').val(1);
+                $('#total_price_b').val(data.sale_rate);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching product details by code:', error);
+            }
+        });
+    });
 
         // Listen to changes in the quantity input
         $('#quantityInput,#saleRateInput').on('input', function() {
