@@ -69,7 +69,7 @@
                         <div class="col-lg-1 col-sm-3">
                             <div class="form-group">
                                 <label for="simpleinput"> Total</label>
-                                <input  type="number" readonly name="total_price_b" id="total_price_b" class="form-control" required>
+                                <input type="number" readonly name="total_price_b" id="total_price_b" class="form-control" required>
                             </div>
 
                         </div>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <table class="table table-bordered">
                                 <thead>
 
@@ -90,11 +90,28 @@
                                         <td>Qty</td>
                                         <td>Price</td>
                                         <td>Total</td>
+                                        <td>Action</td>
                                     </tr>
                                 </thead>
                                 <tbody id="itemsTable">
 
                                 </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-5">
+                            <table class="table">
+                                <tr>
+                                    <th>Sub Total</th>
+                                    <td id="sub_total">0.00</td>
+                                </tr>
+                                <tr>
+                                    <th>Disc%</th>
+                                    <td><input type="text" id="discount" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <th>Grand Total</th>
+                                    <td id="grand_total">0.00</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -141,8 +158,9 @@
         }
 
     });
+
     function removeIt(id) {
-        $('#add_items_'+id).remove();
+        $('#add_items_' + id).remove();
     }
     // $('.btn_delete').click(function() {
     //     alert(val);
@@ -179,30 +197,30 @@
             });
         });
 
-         // Listen to changes in the code input
-    $('input[name="code"]').on('input', function() {
-        // Fetch items and sale rate when a value is entered into the code input
-        var enteredCode = $(this).val();
+        // Listen to changes in the code input
+        $('input[name="code"]').on('input', function() {
+            // Fetch items and sale rate when a value is entered into the code input
+            var enteredCode = $(this).val();
 
-        // Make Ajax request to fetch item details based on the entered code
-        $.ajax({
-            url: '/get-product-details-by-code/' + enteredCode,
-            type: 'GET',
-            success: function(data) {
-                // $('.items').val(data.id).change();
-                $('.items').val(data.id).trigger('change');
+            // Make Ajax request to fetch item details based on the entered code
+            $.ajax({
+                url: '/get-product-details-by-code/' + enteredCode
+                , type: 'GET'
+                , success: function(data) {
+                    // $('.items').val(data.id).change();
+                    $('.items').val(data.id).trigger('change');
 
-                $('input[name="original_sale_rate"]').val(data.sale_rate);
-                $('input[name="sale_rate"]').val(data.sale_rate);
-                // Reset the quantity input to 1
-                $('#quantityInput').val(1);
-                $('#total_price_b').val(data.sale_rate);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching product details by code:', error);
-            }
+                    $('input[name="original_sale_rate"]').val(data.sale_rate);
+                    $('input[name="sale_rate"]').val(data.sale_rate);
+                    // Reset the quantity input to 1
+                    $('#quantityInput').val(1);
+                    $('#total_price_b').val(data.sale_rate);
+                }
+                , error: function(xhr, status, error) {
+                    console.error('Error fetching product details by code:', error);
+                }
+            });
         });
-    });
 
         // Listen to changes in the quantity input
         $('#quantityInput,#saleRateInput').on('input', function() {
@@ -229,3 +247,4 @@
 
 
 @endpush
+
