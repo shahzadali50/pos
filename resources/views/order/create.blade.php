@@ -102,7 +102,7 @@
                             <table class="table">
                                 <tr>
                                     <th>Sub Total</th>
-                                    <td id="sub_total">0.00</td>
+                                    <td id="sub_total">00.00</td>
                                 </tr>
                                 <tr>
                                     <th>Disc%</th>
@@ -110,7 +110,7 @@
                                 </tr>
                                 <tr>
                                     <th>Grand Total</th>
-                                    <td id="grand_total">0.00</td>
+                                    <td id="grand_total">00.00</td>
                                 </tr>
                             </table>
                         </div>
@@ -142,7 +142,7 @@
                         <td>${prod_name}</td>/
                         <td>${prod_qty}</td>/
                         <td>${prod_price}</td>/
-                        <td id="Total_Price">${prod_qty * prod_price}</td>/
+                        <td>${prod_qty * prod_price}</td>/
                         <td><button type="button" onclick="removeIt(${prod_id})" value='' class="btn btn-light btn_delete"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></button></td>/
                         <td><input type="number" name="product_qty[]" value="${prod_qty}"  class="form-control" /></td>/
                       <td>  <input type="number"  name="product_price[]" value="${prod_price }"  class="form-control product_price" /></td>/
@@ -232,51 +232,39 @@
     });
 
 
-    // show value in subTotal
-$('.btn_Add_items').on('click', function() {
-    let subTotal=0;
-    var total_Price = $('.product_price');
-    console.log(total_Price);
+    // show value in subTotal🤍
+    $('.btn_Add_items').on('click', function() {
+        let subTotal = 0;
+        var total_Price = $('.product_price');
+        // console.log(total_Price);
 
-   $.each(total_Price, function(index, element) {
-    console.log(element);
-    subTotal+=parseFloat(element.value);
+        $.each(total_Price, function(index, element) {
+            subTotal += parseFloat(element.value);
+            $('#sub_total').text(subTotal);
+            // $('#grand_total ').text(subTotal);
+
+        });
+
+    });
+    // calculate discount 🤍
+    $('#discount').on('input', function() {
+    // Get the entered discount value
+    var discountValue = parseFloat($(this).val());
+
+    // Check if the entered discount is a valid number
+    if (!isNaN(discountValue)) {
+        // Get the current sub_total value
+        var subTotal = parseFloat($('#sub_total').text());
+
+        // Calculate the discounted total
+        var discountedSubTotal = subTotal - (subTotal * (discountValue / 100));
+        // Update the total with the discounted value
+        $('#grand_total').text(discountedSubTotal.toFixed(1));
+
+    }
 });
-console.log(subTotal);
-    // alert(Total_Price)
 
-    //var subTotal = parseFloat($('#sub_total').text());
-    //subTotal += Total_Price;
-    $('#sub_total').text(subTotal);
-
-
-    // Check if the total_price_b is a valid number
-    // if (!isNaN(total_price_b)) {
-    //     // Get the current sub_total value
-    //     var subTotal = parseFloat($('#sub_total').text());
-
-    //     // Add the total_price_b to the sub_total
-    //     subTotal += total_price_b;
-
-    //     // Update the sub_total with the new value
-    //     $('#sub_total').text(subTotal.toFixed(2));
-
-    //     // Add a new row to the items table with the total_price_b value
-    //     var newRow = '<tr><td class="totalPriceB">' + total_price_b.toFixed(2) + '</td></tr>';
-    //     // $('#itemsTable').append(newRow);
-    // }
-
-    // // Clear the total_price_b input field
-    // $('#total_price_b').val('');
-});
 
 </script>
-
-
-
-
-
-
-
 
 @endpush
