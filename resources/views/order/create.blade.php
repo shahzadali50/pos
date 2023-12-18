@@ -128,6 +128,8 @@
     $(document).ready(function() {
         $('.items_select').select2();
     });
+
+    // click .btn_Add_items then show value in table
     $('.btn_Add_items').click(function() {
         let prod_id = $('.items_select :selected').val();
         let prod_name = $('.items_select :selected').text();
@@ -137,7 +139,7 @@
 
         if (prod_id && prod_name && prod_qty && prod_price) {
             $('#itemsTable').append(`
-                    <tr id="add_items_${prod_id}" >/
+                    <tr id="add_items_${prod_id}"" >/
 
                         <td>${prod_name}</td>/
                         <td>${prod_qty}</td>/
@@ -161,6 +163,7 @@
 
     function removeIt(id) {
         $('#add_items_' + id).remove();
+
     }
 
 </script>
@@ -248,23 +251,23 @@
     });
     // calculate discount 🤍
     $('#discount').on('input', function() {
-    // Get the entered discount value
-    var discountValue = parseFloat($(this).val());
+        // Get the entered discount value
+        var discountValue = parseFloat($(this).val());
 
-    // Check if the entered discount is a valid number
-    if (!isNaN(discountValue)) {
-        // Get the current sub_total value
-        var subTotal = parseFloat($('#sub_total').text());
+        // Check if the entered discount is a valid number
+        if (!isNaN(discountValue)) {
+            // Get the current sub_total value
+            var subTotal = parseFloat($('#sub_total').text());
 
-        // Calculate the discounted total
-        var discountedSubTotal = subTotal - (subTotal * (discountValue / 100));
-        // Update the total with the discounted value
-        $('#grand_total').text(discountedSubTotal.toFixed(1));
+            // Calculate the discounted total
+            var discountedSubTotal = subTotal - (subTotal * (discountValue / 100));
+            // Update the total with the discounted value
+            $('#grand_total').text(discountedSubTotal.toFixed(1));
 
-    }
-});
-
+        }
+    });
 
 </script>
 
 @endpush
+
