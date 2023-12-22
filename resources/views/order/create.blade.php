@@ -14,7 +14,7 @@
                         <div class="col-md-4 col-sm-8">
                             <div class="form-group">
                                 <label for="simpleinput">Customer Name <span class="text-danger">*</span></label>
-                                <input type="text" name="c_name" class="form-control" placeholder="Customer Name"
+                                <input type="text" name="customer_name" class="form-control" placeholder="Customer Name"
                                     required>
                             </div>
 
@@ -22,7 +22,8 @@
                         <div class="col-md-4 col-sm-8 ">
                             <div class="form-group ">
                                 <label for="simpleinput">Phone No<span class="text-danger">*</span></label>
-                                <input type="number" name="phone" class="form-control" placeholder="Phone No." required>
+                                <input type="number" name="customer_phone" class="form-control" placeholder="Phone No."
+                                    required>
                             </div>
 
                         </div>
@@ -59,7 +60,7 @@
                         </div>
                         <div class="col-lg-1 col-sm-3">
                             <div class="form-group">
-                                <label for="simpleinput"> Price</label>
+                                <label for="simpleinput">Price</label>
                                 <input type="hidden" name="original_sale_rate" id="originalSaleRateInput"
                                     class="form-control">
                                 <input type="number" name="sale_rate" id="saleRateInput" class="form-control" required>
@@ -81,7 +82,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-9">
                             <table class="table table-bordered">
                                 <thead>
 
@@ -97,23 +98,33 @@
 
                                 </tbody>
                             </table>
+                            <button type="submit" class="btn mb-2 btn-info ">Order Generate</button>
+
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-3">
                             <table class="table">
                                 <tr>
                                     <th>Sub Total</th>
                                     <td id="sub_total">00.00</td>
+                                    <input id="sub_totalInput" type="number" name="sub_total" value="0"
+                                        class="form-control" />
                                 </tr>
                                 <tr>
                                     <th>Disc%</th>
                                     <td><input type="text" id="discount" value="0"></td>
+                                    <input  id="discInput" type="number" name="disc" value="0" class="form-control" />
+
                                 </tr>
                                 <tr>
                                     <th>Grand Total</th>
                                     <td id="grand_total">00.00</td>
+                                    <input id="grand_totalInput" type="number" name="grand_total" value="0"
+                                        class="form-control" />
+
                                 </tr>
                             </table>
                         </div>
+
                     </div>
                 </form>
             </div>
@@ -145,9 +156,10 @@
                         <td>
                     <button type="button" onclick="removeIt(${prod_id})" class="btn btn-light btn_delete">
                         <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
-                    </button>
-                </td>                        <td><input type="number" name="product_qty[]" value="${prod_qty}"  class="form-control" /></td>/
-                      <td>  <input type="number"  name="product_price[]" value="${prod_price }"  class="form-control product_price" /></td>/
+                    </button> </td>  /
+                                            <td><input readonly  type="number" name="product_id" value="${prod_id}"  class="form-control" /> </td>/
+                                            <td><input readonly type="number" name="product_qty" value="${prod_qty}"  class="form-control" /> </td>/
+                                            <td>  <input type="number"  name="product_price" value="${prod_price }"  class="form-control product_price" /> </td>/
                     </tr>
 
 
@@ -161,17 +173,20 @@
     });
 
     function removeIt(id) {
-
         $('#add_items_' + id).remove();
         let subTotal = 0;
         var total_Price = $('.product_price');
         $('#sub_total').text(subTotal);
         $('#grand_total ').text(subTotal);
+        $('#sub_totalInput').val(subTotal);
+        $('#grand_totalInput').val(subTotal);
         // console.log(total_Price);
         $.each(total_Price, function(index, element) {
             subTotal += parseFloat(element.value);
             $('#sub_total').text(subTotal);
             $('#grand_total ').text(subTotal);
+            $('#sub_totalInput').val(subTotal);
+            $('#grand_totalInput').val(subTotal);
         });
     }
 </script>
@@ -241,12 +256,15 @@
             subTotal += parseFloat(element.value);
             $('#sub_total').text(subTotal);
             $('#grand_total ').text(subTotal);
+            $('#sub_totalInput').val(subTotal);
+            $('#grand_totalInput').val(subTotal);
         });
     });
     // calculate discount 🤍
     $('#discount').on('input', function() {
         // Get the entered discount value
         var discountValue = parseFloat($(this).val());
+        $('#discInput').val(discountValue);
         // Check if the entered discount is a valid number
         if (!isNaN(discountValue)) {
             // Get the current sub_total value
@@ -255,6 +273,7 @@
             var discountedSubTotal = subTotal - (subTotal * (discountValue / 100));
             // Update the total with the discounted value
             $('#grand_total').text(discountedSubTotal.toFixed(1));
+            $('#grand_totalInput').val(discountedSubTotal.toFixed(1));
         }
     });
 </script>
