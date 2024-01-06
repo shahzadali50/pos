@@ -45,6 +45,7 @@ Route::post('/product/add/stock', [ProductController::class, 'AddStock'])->name(
 Route::get('/order/create', [OrderController::class, 'order'])->name('order.create');
 Route::get('/get-product-details/{id}', [OrderController::class, 'items']);
 Route::get('/get-product-details-by-code/{code}', [OrderController::class, 'itemsByCode']); 
+Route::post('store.order', [OrderController::class, 'store'])->name('store.order');; 
 
 
 

@@ -8,7 +8,8 @@
         <div class="card shadow mb-4">
 
             <div class="card-body">
-                <form action="" method="">
+                <form action="{{ route('store.order') }}" method="POST">
+                    @csrf
 
                     <div class="row">
                         <div class="col-md-4 col-sm-8">
@@ -47,14 +48,14 @@
                         <div class="col-lg-2 col-sm-2">
                             <div class="form-group">
                                 <label for="simpleinput">code</label>
-                                <input type="text" name="code" class="form-control" required>
+                                <input type="text" name="code" class="form-control">
                             </div>
 
                         </div>
                         <div class="col-lg-2 col-sm-1">
                             <div class="form-group">
                                 <label for="simpleinput">Qty</label>
-                                <input type="number" name="qty" id="quantityInput" class="form-control" required>
+                                <input type="number" name="qty" id="quantityInput" class="form-control" >
                             </div>
 
                         </div>
@@ -63,7 +64,7 @@
                                 <label for="simpleinput">Price</label>
                                 <input type="hidden" name="original_sale_rate" id="originalSaleRateInput"
                                     class="form-control">
-                                <input type="number" name="sale_rate" id="saleRateInput" class="form-control" required>
+                                <input type="number" name="sale_rate" id="saleRateInput" class="form-control" >
                             </div>
 
                         </div>
