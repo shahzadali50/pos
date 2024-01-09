@@ -99,7 +99,8 @@
 
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn mb-2 btn-info ">Order Generate</button>
+                            {{-- <button type="submit" class="btn mb-2 btn-info ">Order Generate</button> --}}
+
 
                         </div>
                         <div class="col-sm-3">
@@ -107,23 +108,26 @@
                                 <tr>
                                     <th>Sub Total</th>
                                     <td id="sub_total">00.00</td>
-                                    <input id="sub_totalInput" type="number" name="sub_total" value="0"
+                                    <input hidden id="sub_totalInput" type="number" name="sub_total" value="0"
                                         class="form-control" />
                                 </tr>
                                 <tr>
                                     <th>Disc%</th>
                                     <td><input type="text" id="discount" value="0"></td>
-                                    <input  id="discInput" type="number" name="disc" value="0" class="form-control" />
+                                    <input hidden id="discInput" type="number" name="disc" value="0" class="form-control" />
 
                                 </tr>
                                 <tr>
                                     <th>Grand Total</th>
                                     <td id="grand_total">00.00</td>
-                                    <input id="grand_totalInput" type="number" name="grand_total" value="0"
+                                    <input hidden id="grand_totalInput" type="number" name="grand_total" value="0"
                                         class="form-control" />
 
                                 </tr>
                             </table>
+                            <button type="submit" class="btn mb-2 btn-info ">Order Generate</button>
+
+
                         </div>
 
                     </div>
@@ -158,9 +162,9 @@
                     <button type="button" onclick="removeIt(${prod_id})" class="btn btn-light btn_delete">
                         <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                     </button> </td>  /
-                                            <td><input readonly  type="number" name="product_id" value="${prod_id}"  class="form-control" /> </td>/
-                                            <td><input readonly type="number" name="product_qty" value="${prod_qty}"  class="form-control" /> </td>/
-                                            <td>  <input type="number"  name="product_price" value="${prod_price }"  class="form-control product_price" /> </td>/
+                                            <td><input readonly  type="number" name="product_id[]" value="${prod_id}"  class="form-control" /> </td>/
+                                            <td><input readonly type="number" name="product_qty[]" value="${prod_qty}"  class="form-control" /> </td>/
+                                            <td>  <input type="number"  name="product_price[]" value="${prod_price }"  class="form-control product_price"/> </td>/
                     </tr>
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use\App\Models\Order;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,19 +41,30 @@ class OrderController extends Controller
         }
     }
     public function store(Request $request){
-        $order = new Order();
-        $order->customer_name = $request->input('customer_name');
-        $order->customer_phone = $request->input('customer_phone');
-        $order->sub_total = $request->input('sub_total');
-        $order->disc = $request->input('disc');
-        $order->grand_total = $request->input('grand_total');
-        $order->paid = $request->input('paid');
-        $order->save();
-        // flashy()->info('Products will be Added Successfully. ✅', '#');
-        return redirect()->route('order.create')->with('success', 'Order created successfully');
+        $order = Order::create([
+            'customer_name' => $request->customer_name,
+            'customer_phone' => $request->customer_phone,
+            'sub_total' => $request->sub_total,
+            'disc' => $request->disc,
+            'grand_total' => $request->grand_total,
+            'paid' => $request->paid,
+        ]);
+        $orderID=$order->id;
+        foreach ($request->product_id as $key => $value) {
+            $order = OrderItem::create([
+                'order_id' => $orderID,
+                'product_id' => $request->product_id[$key],
+                'product_qty' => $request->product_qty[$key],
+                'product_price' => $request->product_price[$key],
+            ]);
+        
+        }
+        flashy()->info('Order will be Generate Successfully. ✅', '#');
+        return redirect()->route('order.create');
+}
 }
     
-}
+
 
 
 

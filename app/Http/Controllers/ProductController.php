@@ -43,6 +43,7 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'photo' => $filePath,
         ]);
+        
         flashy()->info('Products will be Added Successfully. ✅', '#');
 
         return redirect()->route('product.add');
