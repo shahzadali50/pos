@@ -139,25 +139,30 @@
     });
     // click .btn_Add_items then show value in table
     $('.btn_Add_items').click(function() {
-        let prod_id = $('.items_select :selected').val();
-        let prod_name = $('.items_select :selected').text();
-        let prod_qty = $('#quantityInput').val();
-        let prod_price = $('#saleRateInput').val();
+    let prod_id = $('.items_select :selected').val();
+    let prod_name = $('.items_select :selected').text();
+    let prod_qty = $('#quantityInput').val();
+    let prod_price = $('#saleRateInput').val();
 
-        if (prod_id && prod_name && prod_qty && prod_price) {
-            // Check if product with the same ID already exists
-            let existingRow = $(`#add_items_${prod_id}`);
+    if (prod_id && prod_name && prod_qty && prod_price) {
+        // Check if product with the same ID already exists
+        let existingRow = $(`#add_items_${prod_id}`);
+        
+        if (existingRow.length > 0) {
+            // Update quantity and total price
+            let existingQty = parseFloat(existingRow.find('td:nth-child(2)').text());
+            let existingPrice = parseFloat(existingRow.find('td:nth-child(3)').text());
+            
+            existingRow.find('td:nth-child(2)').text(existingQty + parseFloat(prod_qty));
+            existingRow.find('td:nth-child(4)').text((existingQty + parseFloat(prod_qty)) * existingPrice);
 
-            if (existingRow.length > 0) {
-                // Update quantity and total price
-                let existingQty = parseFloat(existingRow.find('td:nth-child(2)').text());
-                let existingPrice = parseFloat(existingRow.find('td:nth-child(3)').text());
-
-                existingRow.find('td:nth-child(2)').text(existingQty + parseFloat(prod_qty));
-                existingRow.find('td:nth-child(4)').text((existingQty + parseFloat(prod_qty)) * existingPrice);
-            } else {
-                // Add a new row
-                $('#itemsTable').append(`
+            // Update input fields
+            existingRow.find('input[name="product_id[]"]').val(prod_id);
+            existingRow.find('input[name="product_qty[]"]').val(existingQty + parseFloat(prod_qty));
+            existingRow.find('input[name="product_price[]"]').val(existingPrice + parseFloat(prod_price));
+        } else {
+            // Add a new row
+            $('#itemsTable').append(`
                 <tr id="add_items_${prod_id}">
                     <td>${prod_name}</td>
                     <td>${prod_qty}</td>
@@ -173,17 +178,20 @@
                     <td><input type="number" name="product_price[]" value="${prod_price}" class="form-control product_price"/></td>
                 </tr>
             `);
-            }
-
-            // Clear input fields
-            $('.items_select').val('');
-            $('#quantityInput').val('');
-            $('#saleRateInput').val('');
-            
-        } else {
-            alert('Please fill in all required fields.');
         }
-    });
+
+        // Clear input fields
+        $('.items_select').val('');
+        $('#quantityInput').val('');
+        $('#saleRateInput').val('');
+    } else {
+        alert('Please fill in all required fields.');
+    }
+});
+
+
+
+
 
 
     function removeIt(id) {
