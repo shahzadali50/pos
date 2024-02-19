@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -40,7 +40,8 @@ class OrderController extends Controller
             return response()->json(['error' => 'Product not found.'], 404);
         }
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $order = Order::create([
             'customer_name' => $request->customer_name,
             'customer_phone' => $request->customer_phone,
@@ -49,7 +50,7 @@ class OrderController extends Controller
             'grand_total' => $request->grand_total,
             'paid' => $request->paid,
         ]);
-        $orderID=$order->id;
+        $orderID = $order->id;
         foreach ($request->product_id as $key => $value) {
             $order = OrderItem::create([
                 'order_id' => $orderID,
@@ -57,14 +58,9 @@ class OrderController extends Controller
                 'product_qty' => $request->product_qty[$key],
                 'product_price' => $request->product_price[$key],
             ]);
-        
+
         }
         flashy()->info('Order will be Generate Successfully. ✅', '#');
         return redirect()->route('order.create');
+    }
 }
-}
-    
-
-
-
-

@@ -137,7 +137,6 @@
     $(document).ready(function() {
         $('.items_select').select2();
     });
-    // click .btn_Add_items then show value in table
     $('.btn_Add_items').click(function() {
     let prod_id = $('.items_select :selected').val();
     let prod_name = $('.items_select :selected').text();
@@ -147,19 +146,20 @@
     if (prod_id && prod_name && prod_qty && prod_price) {
         // Check if product with the same ID already exists
         let existingRow = $(`#add_items_${prod_id}`);
-        
+
         if (existingRow.length > 0) {
             // Update quantity and total price
             let existingQty = parseFloat(existingRow.find('td:nth-child(2)').text());
             let existingPrice = parseFloat(existingRow.find('td:nth-child(3)').text());
-            
+
             existingRow.find('td:nth-child(2)').text(existingQty + parseFloat(prod_qty));
             existingRow.find('td:nth-child(4)').text((existingQty + parseFloat(prod_qty)) * existingPrice);
 
             // Update input fields
             existingRow.find('input[name="product_id[]"]').val(prod_id);
             existingRow.find('input[name="product_qty[]"]').val(existingQty + parseFloat(prod_qty));
-            existingRow.find('input[name="product_price[]"]').val(existingPrice + parseFloat(prod_price));
+            existingRow.find('input[name="product_price[]"]').val(existingPrice * (existingQty + parseFloat(prod_qty)));
+
         } else {
             // Add a new row
             $('#itemsTable').append(`
@@ -188,6 +188,8 @@
         alert('Please fill in all required fields.');
     }
 });
+
+
 
 
 
