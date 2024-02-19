@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-12">
-        <h2 class="page-title">Oder Create</h2>
+        <h2 class="page-title">Order Create</h2>
         <div class="card shadow mb-4">
 
             <div class="card-body">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-9">
+                        <div class="col-sm-7" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">
                             <table class="table table-bordered">
                                 <thead>
 
@@ -99,27 +99,32 @@
 
 
                         </div>
-                        <div class="col-sm-3">
-                            <table class="table">
-                                <tr>
-                                    <th>Sub Total</th>
-                                    <td id="sub_total">00.00</td>
-                                    <input hidden id="sub_totalInput" type="number" name="sub_total" value="0" class="form-control" />
-                                </tr>
-                                <tr>
-                                    <th>Disc%</th>
-                                    <td><input type="text" id="discount" value="0"></td>
-                                    <input hidden id="discInput" type="number" name="disc" value="0" class="form-control" />
+                        <div class="col-sm-5">
+                            <div class="card px-3" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                <div class="card-header">
+                                    <h5>Order Summary</h5>
+                                </div>
+                                <table class="table">
+                                    <tr>
+                                        <th>Sub Total</th>
+                                        <td id="sub_total">00</td>
+                                        <input hidden id="sub_totalInput" type="number" name="sub_total" value="0" class="form-control" />
+                                    </tr>
+                                    <tr>
+                                        <th>Disc%</th>
+                                        <td><input type="text" id="discount" value="0"></td>
+                                        <input hidden id="discInput" type="number" name="disc" value="0" class="form-control" />
 
-                                </tr>
-                                <tr>
-                                    <th>Grand Total</th>
-                                    <td id="grand_total">00.00</td>
-                                    <input hidden id="grand_totalInput" type="number" name="grand_total" value="0" class="form-control" />
+                                    </tr>
+                                    <tr>
+                                        <th>Grand Total</th>
+                                        <td id="grand_total">00</td>
+                                        <input hidden id="grand_totalInput" type="number" name="grand_total" value="0" class="form-control" />
 
-                                </tr>
-                            </table>
-                            <button type="submit" class="btn mb-2 btn-info ">Order Generate</button>
+                                    </tr>
+                                </table>
+                                <button type="submit" class="btn mb-2 btn-info ">Order Generate</button>
+                            </div>
 
 
                         </div>
@@ -138,31 +143,31 @@
         $('.items_select').select2();
     });
     $('.btn_Add_items').click(function() {
-    let prod_id = $('.items_select :selected').val();
-    let prod_name = $('.items_select :selected').text();
-    let prod_qty = $('#quantityInput').val();
-    let prod_price = $('#saleRateInput').val();
+        let prod_id = $('.items_select :selected').val();
+        let prod_name = $('.items_select :selected').text();
+        let prod_qty = $('#quantityInput').val();
+        let prod_price = $('#saleRateInput').val();
 
-    if (prod_id && prod_name && prod_qty && prod_price) {
-        // Check if product with the same ID already exists
-        let existingRow = $(`#add_items_${prod_id}`);
+        if (prod_id && prod_name && prod_qty && prod_price) {
+            // Check if product with the same ID already exists
+            let existingRow = $(`#add_items_${prod_id}`);
 
-        if (existingRow.length > 0) {
-            // Update quantity and total price
-            let existingQty = parseFloat(existingRow.find('td:nth-child(2)').text());
-            let existingPrice = parseFloat(existingRow.find('td:nth-child(3)').text());
+            if (existingRow.length > 0) {
+                // Update quantity and total price
+                let existingQty = parseFloat(existingRow.find('td:nth-child(2)').text());
+                let existingPrice = parseFloat(existingRow.find('td:nth-child(3)').text());
 
-            existingRow.find('td:nth-child(2)').text(existingQty + parseFloat(prod_qty));
-            existingRow.find('td:nth-child(4)').text((existingQty + parseFloat(prod_qty)) * existingPrice);
+                existingRow.find('td:nth-child(2)').text(existingQty + parseFloat(prod_qty));
+                existingRow.find('td:nth-child(4)').text((existingQty + parseFloat(prod_qty)) * existingPrice);
 
-            // Update input fields
-            existingRow.find('input[name="product_id[]"]').val(prod_id);
-            existingRow.find('input[name="product_qty[]"]').val(existingQty + parseFloat(prod_qty));
-            existingRow.find('input[name="product_price[]"]').val(existingPrice * (existingQty + parseFloat(prod_qty)));
+                // Update input fields
+                existingRow.find('input[name="product_id[]"]').val(prod_id);
+                existingRow.find('input[name="product_qty[]"]').val(existingQty + parseFloat(prod_qty));
+                existingRow.find('input[name="product_price[]"]').val(existingPrice * (existingQty + parseFloat(prod_qty)));
 
-        } else {
-            // Add a new row
-            $('#itemsTable').append(`
+            } else {
+                // Add a new row
+                $('#itemsTable').append(`
                 <tr id="add_items_${prod_id}">
                     <td>${prod_name}</td>
                     <td>${prod_qty}</td>
@@ -173,21 +178,21 @@
                             <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                         </button>
                     </td>
-                    <td><input readonly type="number" name="product_id[]" value="${prod_id}" class="form-control" /></td>
-                    <td><input readonly type="number" name="product_qty[]" value="${prod_qty}" class="form-control" /></td>
-                    <td><input type="number" name="product_price[]" value="${prod_price}" class="form-control product_price"/></td>
+                    <td class="d-none" ><input  readonly type="number" name="product_id[]" value="${prod_id}" class="form-control" /></td>
+                    <td class="d-none"><input  readonly type="number" name="product_qty[]" value="${prod_qty}" class="form-control" /></td>
+                    <td class="d-none"><input  readonly type="number" name="product_price[]" value="${prod_price}" class="form-control product_price"/></td>
                 </tr>
             `);
-        }
+            }
 
-        // Clear input fields
-        $('.items_select').val('');
-        $('#quantityInput').val('');
-        $('#saleRateInput').val('');
-    } else {
-        alert('Please fill in all required fields.');
-    }
-});
+            // Clear input fields
+            $('.items_select').val('');
+            $('#quantityInput').val('');
+            $('#saleRateInput').val('');
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    });
 
 
 
