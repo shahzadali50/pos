@@ -44,7 +44,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Code</label>
-                                <input  name="code" type="number" class="form-control" placeholder="Code" required>
+                                <input name="code" type="number" class="form-control" placeholder="Code" required>
                             </div>
 
                         </div>
@@ -58,7 +58,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Purchase Rate</label>
-                                <input  name="purchase_rate" type="number" class="form-control" placeholder="Purchase Rate" required>
+                                <input name="purchase_rate" type="number" class="form-control" placeholder="Purchase Rate" required>
                             </div>
 
                         </div>
@@ -72,18 +72,18 @@
 
                         <div class="col-md-6">
                             <label for="simpleinput">Drop files here, paste or browse</label>
-                            <input  name="photo" type="file" class="form-control mb-3" accept="image/*">
+                            <input name="photo" type="file" class="form-control mb-3" accept="image/*" required>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="exampleFormControlTextarea1">Description</label>
-                                <textarea  name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
 
                         </div>
                         <div class="col-12">
                             <button type="reset" class="btn mb-2 btn-warning">Reset</button>
-                            <button type="submit" class="btn mb-2 btn-info">Add Catogory</button>
+                            <button type="submit" class="btn mb-2 btn-info">Product Add</button>
                         </div>
                     </div>
                 </form>

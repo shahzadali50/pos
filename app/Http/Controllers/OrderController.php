@@ -60,7 +60,17 @@ class OrderController extends Controller
             ]);
 
         }
-        flashy()->info('Order will be Generate Successfully. ✅', '#');
+        flashy()->success('Order will be Generate Successfully. ✅', '#');
         return redirect()->route('order.create');
     }
+    public function order_list(){
+        $list = Order::all();
+        return view('order.order-list', compact('list'));
+    }
+    public function order_items(){
+        $list = OrderItem::all();
+        return view('order.order-items', compact('list'));
+    }
+
+
 }

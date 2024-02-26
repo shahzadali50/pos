@@ -79,8 +79,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-7" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">
-                            <table class="table table-bordered">
+                        <div class="col-sm-7 " style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">
+                            <table class="table table-bordered mt-2">
                                 <thead>
 
                                     <tr>
@@ -112,7 +112,7 @@
                                     </tr>
                                     <tr>
                                         <th>Disc%</th>
-                                        <td><input type="text" id="discount" value="0"></td>
+                                        <td><input type="number" id="discount" value="0"></td>
                                         <input hidden id="discInput" type="number" name="disc" value="0" class="form-control" />
 
                                     </tr>
@@ -124,6 +124,7 @@
                                     </tr>
                                 </table>
                                 <button type="submit" class="btn mb-2 btn-info ">Order Generate</button>
+
                             </div>
 
 
@@ -178,6 +179,7 @@
                             <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                         </button>
                     </td>
+                    <td class="" ><input  readonly type="text" name="product_name[]" value="${prod_name}" class="form-control" /></td>
                     <td class="d-none" ><input  readonly type="number" name="product_id[]" value="${prod_id}" class="form-control" /></td>
                     <td class="d-none"><input  readonly type="number" name="product_qty[]" value="${prod_qty}" class="form-control" /></td>
                     <td class="d-none"><input  readonly type="number" name="product_price[]" value="${prod_price}" class="form-control product_price"/></td>

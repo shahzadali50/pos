@@ -46,7 +46,9 @@
               <span class="ml-lg-2">Orders</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
-              <a class="nav-link pl-lg-2" href="{{ route('order.create') }}"><span class="ml-1">Order Create</span></a>
+              <a class="nav-link pl-lg-2" href="{{ route('order.create') }}"><span class="ml-1">Create</span></a>
+              <a class="nav-link pl-lg-2" href="{{ route('order.list') }}"><span class="ml-1">Orders</span></a>
+              <a class="nav-link pl-lg-2" href="{{ route('order.items') }}"><span class="ml-1">Order Items</span></a>
 
             </div>
           </li>
