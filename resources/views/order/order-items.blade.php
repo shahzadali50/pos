@@ -16,6 +16,7 @@
                                 <thead>
                                     <tr class="table-primary">
                                         <th scope="col" class="h5" style="color: #001a4e">order Id</th>
+                                        <th scope="col" class="h5" style="color: #001a4e">Name</th>
                                         <th scope="col" class="h5" style="color: #001a4e">product id</th>
                                         <th scope="col" class="h5" style="color: #001a4e">product qty</th>
                                         <th scope="col" class="h5" style="color: #001a4e">product price</th>
@@ -26,7 +27,9 @@
                                 <tbody>
                                     @foreach ($list as $items_list )
                                     <tr>
+
                                         <th scope="row">{{$items_list->order_id}}</th>
+                                        <td>{{ $items_list->product->name }}</td>
                                         <td>{{$items_list->product_id }}</td>
                                         <td>{{$items_list->product_qty}}</td>
                                         <td>{{$items_list->product_price}}</td>

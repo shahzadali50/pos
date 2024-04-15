@@ -68,7 +68,8 @@ class OrderController extends Controller
         return view('order.order-list', compact('list'));
     }
     public function order_items(){
-        $list = OrderItem::all();
+        $list = OrderItem::with('product')->get();
+        // $list = OrderItem::all();
         return view('order.order-items', compact('list'));
     }
 

@@ -179,7 +179,7 @@
                             <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                         </button>
                     </td>
-                    <td class="" ><input  readonly type="text" name="product_name[]" value="${prod_name}" class="form-control" /></td>
+                    <td class="d-none" ><input  readonly type="text" name="product_name[]" value="${prod_name}" class="form-control" /></td>
                     <td class="d-none" ><input  readonly type="number" name="product_id[]" value="${prod_id}" class="form-control" /></td>
                     <td class="d-none"><input  readonly type="number" name="product_qty[]" value="${prod_qty}" class="form-control" /></td>
                     <td class="d-none"><input  readonly type="number" name="product_price[]" value="${prod_price}" class="form-control product_price"/></td>

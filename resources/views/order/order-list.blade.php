@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col-12">
-        <h2 class="mb-2 page-title">Order List</h2>
+        <h2 class="mb-2 page-title">All Orders </h2>
 
         <div class="row my-4">
             <!-- Small table -->
