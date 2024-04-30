@@ -48,3 +48,4 @@ Route::get('/get-product-details-by-code/{code}', [OrderController::class, 'item
 Route::post('order/store.', [OrderController::class, 'store'])->name('store.order');
 Route::get('order/list', [OrderController::class, 'order_list'])->name('order.list');
 Route::get('order/items', [OrderController::class, 'order_items'])->name('order.items');
+Route::get('order/receipt/{id}', [OrderController::class, 'receipt'])->name('receipt');

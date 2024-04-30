@@ -73,5 +73,13 @@ class OrderController extends Controller
         return view('order.order-items', compact('list'));
     }
 
+    public function receipt($id)
+{
+    $order = Order::findOrFail($id);
+    $orderItems = OrderItem::with('product')->where('order_id', $id)->get();
+    return view('pos-receipt', compact('order', 'orderItems'));
+}
+
+
 
 }

@@ -20,7 +20,7 @@
                                         <th scope="col" class="h5" style="color: #001a4e">product id</th>
                                         <th scope="col" class="h5" style="color: #001a4e">product qty</th>
                                         <th scope="col" class="h5" style="color: #001a4e">product price</th>
-
+                                        
 
                                     </tr>
                                 </thead>
@@ -29,12 +29,15 @@
                                     <tr>
 
                                         <th scope="row">{{$items_list->order_id}}</th>
-                                        <td>{{ $items_list->product->name }}</td>
+                                        {{-- <td>{{ $items_list->product->name }}</td> --}}
+                                        @if($items_list->product)
+                                       <td> {{ $items_list->product->name }}</td>
+                                        @else
+                                       <td> Product not found</td>
+                                        @endif
                                         <td>{{$items_list->product_id }}</td>
                                         <td>{{$items_list->product_qty}}</td>
                                         <td>{{$items_list->product_price}}</td>
-
-
 
 
                                     </tr>
@@ -51,7 +54,8 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -75,12 +79,11 @@
                             <div class="form-group mb-3">
                                 <input type="text" name="product_id" id="pro_id" value="" hidden>
                                 <label for="simpleinput">Add Stock</label>
-                                <input type="number" name="quantity" class="form-control" placeholder="Add Stock" required>
+                                <input type="number" name="quantity" class="form-control" placeholder="Add Stock"
+                                    required>
                                 <button id="submitForm" type="submit" class="btn mt-2 btn-info">Add</button>
                             </div>
                         </form>
-
-
 
                     </div>
                 </div>

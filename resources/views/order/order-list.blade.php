@@ -20,17 +20,22 @@
                                         <th scope="col" class="h5" style="color: #001a4e">Phone No</th>
                                         <th scope="col" class="h5" style="color: #001a4e">Disc</th>
                                         <th scope="col" class="h5" style="color: #001a4e">Total</th>
+                                        <th scope="col" class="h5" style="color: #001a4e">Action</th>
+
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($list as $order_list )
+                                    @foreach ($list as $order )
                                     <tr>
-                                        <th scope="row">{{$order_list->id }}</th>
-                                        <td>{{$order_list->customer_name }}</td>
-                                        <td>{{$order_list->customer_phone}}</td>
-                                        <td>{{$order_list->disc}}</td>
-                                        <td>{{$order_list->grand_total}}</td>
+                                        <th scope="row">{{$order->id }}</th>
+                                        <td>{{$order->customer_name }}</td>
+                                        <td>{{$order->customer_phone}}</td>
+                                        <td>{{$order->disc}}</td>
+                                        <td>{{$order->grand_total}}</td>
+                                        <td>
+                                            <a class="btn btn-warning" href="{{ route('receipt',$order->id) }}">Receipt</a>
+                                        </td>
 
 
 
