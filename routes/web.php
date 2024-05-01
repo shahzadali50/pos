@@ -1,19 +1,22 @@
 <?php
 
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('login');
 })->name('login');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
+
+Route::get('/dashboard', [MainController::class, 'dashboard'])->name('dashboard');
+Route::get('/total-sale', [MainController::class, 'totalSale'])->name('total.sale');
+Route::get('/monthly-sale', [MainController::class, 'monthlySale'])->name('month.sale');
+Route::get('/weekly-sale', [MainController::class, 'weeklySale'])->name('weekly.sale');
 Route::post('/loginuser', [LoginController::class, 'authenticate'])->name('loginuser');
 Route::get('/loginuser', [LoginController::class, 'logout'])->name('logout');
 // Catogory Routes⭐⭐
@@ -48,4 +51,4 @@ Route::get('/get-product-details-by-code/{code}', [OrderController::class, 'item
 Route::post('order/store.', [OrderController::class, 'store'])->name('store.order');
 Route::get('order/list', [OrderController::class, 'order_list'])->name('order.list');
 Route::get('order/items', [OrderController::class, 'order_items'])->name('order.items');
-Route::get('order/receipt/{id}', [OrderController::class, 'receipt'])->name('receipt');
+Route::get('order/invoice/{id}', [OrderController::class, 'receipt'])->name('receipt');

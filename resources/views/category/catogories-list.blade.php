@@ -1,8 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <div class="col-12">
-        <h2 class="mb-2 page-title">Category List</h2>
+    <div class="col-12  ">
+        <div class="row  justify-content-between mx-3">
+            <h2 class="mb-2 page-title">Category List</h2>
+            <div>
+                <a href="{{ route('category')}}" class="btn btn-success text-white">Add Category</a>
+            </div>
+        </div>
 
         <div class="row my-4">
             <!-- Small table -->
@@ -27,21 +32,28 @@
                                         <th scope="row">{{$Category_list->id }}</th>
                                         <td>{{$Category_list->name}}</td>
                                         <td>{{$Category_list->status}}</td>
-                                        <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span class="text-muted sr-only">Action</span>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
 
-                                              <form action="{{ route('category.updateForm',['id' => $Category_list->id]) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-light dropdown-item">Update</button>
-                                            </form>
-                                                <form action="{{route('categories.delete',['id'=>$Category_list->id]) }}" method="POST" enctype="multipart/form-data">
+                                                <form
+                                                    action="{{ route('category.updateForm',['id' => $Category_list->id]) }}"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit"
+                                                        class="btn btn-light dropdown-item">Update</button>
+                                                </form>
+                                                <form
+                                                    action="{{route('categories.delete',['id'=>$Category_list->id]) }}"
+                                                    method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-light dropdown-item text-danger" >Delete</button>
+                                                    <button type="submit"
+                                                        class="btn btn-light dropdown-item text-danger">Delete</button>
                                                 </form>
 
                                             </div>
@@ -50,7 +62,6 @@
                                     </tr>
 
                                     @endforeach
-
 
                                 </tbody>
                             </table>

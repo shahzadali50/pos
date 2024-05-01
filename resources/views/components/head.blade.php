@@ -5,8 +5,10 @@
         <meta name="author" content="">
         <link rel="icon" href="img/logo/pos_logo.jpg">
         <link rel="icon" href="img/logo/pos_logo.jpg" type="image/gif" sizes="16x16">
-
+        {{-- font-awesome --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        {{-- boxicons --}}
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- Simple bar CSS -->
         <link rel="stylesheet" href="{{url('assets/css/simplebar.css')}}">
         <!-- Fonts CSS -->

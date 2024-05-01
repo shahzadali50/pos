@@ -58,13 +58,17 @@ class OrderController extends Controller
                 'product_qty' => $request->product_qty[$key],
                 'product_price' => $request->product_price[$key],
             ]);
+             // Decrease the quantity of the product
+        $product = Product::find($request->product_id[$key]);
+        $product->quantity -= $request->product_qty[$key];
+        $product->save();
 
         }
         flashy()->success('Order will be Generate Successfully. ✅', '#');
         return redirect()->route('order.create');
     }
     public function order_list(){
-        $list = Order::all();
+        $list = Order::orderBy('id', 'desc')->get();
         return view('order.order-list', compact('list'));
     }
     public function order_items(){
@@ -77,7 +81,7 @@ class OrderController extends Controller
 {
     $order = Order::findOrFail($id);
     $orderItems = OrderItem::with('product')->where('order_id', $id)->get();
-    return view('pos-receipt', compact('order', 'orderItems'));
+    return view('pos-invoice', compact('order', 'orderItems'));
 }
 
 

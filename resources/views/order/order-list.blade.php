@@ -15,7 +15,8 @@
                             <table class="table dataTable">
                                 <thead>
                                     <tr class="table-primary">
-                                        <th scope="col" class="h5" style="color: #001a4e">Id</th>
+                                        <th scope="col" class="h5" style="color: #001a4e">Sr.No</th>
+                                        <th scope="col" class="h5" style="color: #001a4e">Order No</th>
                                         <th scope="col" class="h5" style="color: #001a4e">Customer Name</th>
                                         <th scope="col" class="h5" style="color: #001a4e">Phone No</th>
                                         <th scope="col" class="h5" style="color: #001a4e">Disc</th>
@@ -26,15 +27,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($list as $order )
+                                    @foreach ($list as $index=>$order )
                                     <tr>
+
+                                        <td>{{ $index + 1 }}</td>
                                         <th scope="row">{{$order->id }}</th>
                                         <td>{{$order->customer_name }}</td>
                                         <td>{{$order->customer_phone}}</td>
                                         <td>{{$order->disc}}</td>
                                         <td>{{$order->grand_total}}</td>
                                         <td>
-                                            <a class="btn btn-warning" href="{{ route('receipt',$order->id) }}">Receipt</a>
+                                            <a class="btn btn-warning font-weight-bolder  " href="{{ route('receipt',$order->id) }}">Invoice</a>
                                         </td>
 
 

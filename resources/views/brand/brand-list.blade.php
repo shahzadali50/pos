@@ -2,7 +2,12 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <h2 class="mb-2 page-title">Category List</h2>
+        <div class="row  justify-content-between mx-3">
+            <h2 class="mb-2 page-title">Brand List</h2>
+            <div>
+                <a href="{{ route('brand') }}" class="btn btn-success text-white">Add Brand</a>
+            </div>
+        </div>
 
         <div class="row my-4">
             <!-- Small table -->
