@@ -12,19 +12,21 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Product Name</label>
-                                <input autofocus="true" type="text" name="name" class="form-control" placeholder="Product Name" required>
+                                <input autofocus="true" type="text" name="name" class="form-control"
+                                    placeholder="Product Name" required>
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
 
-
                                 <label for="Status">Category</label>
                                 <select name="category_id" class="form-control category" id="Status">
                                     <option selected disabled>Select Category</option>
                                     @foreach ($categories as $category)
+                                    @if ($category->status == 1)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -35,8 +37,9 @@
                                 <select name="brand_id" class="form-control " id="brand">
                                     <option selected disabled>Select Brand</option>
                                     @foreach ($brand as $brand_name )
+                                    @if ($brand_name->status == 1)
                                     <option value="{{ $brand_name->id }}">{{$brand_name->name }}</option>
-
+                                    @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -51,21 +54,24 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Quantity</label>
-                                <input name="quantity" type="number" class="form-control" placeholder="Quantity" required>
+                                <input name="quantity" type="number" class="form-control" placeholder="Quantity"
+                                    required>
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Purchase Rate</label>
-                                <input name="purchase_rate" type="number" class="form-control" placeholder="Purchase Rate" required>
+                                <input name="purchase_rate" type="number" class="form-control"
+                                    placeholder="Purchase Rate" required>
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="simpleinput">Sale Rate</label>
-                                <input name="sale_rate" type="number" class="form-control" placeholder="Sales Rate" required>
+                                <input name="sale_rate" type="number" class="form-control" placeholder="Sales Rate"
+                                    required>
                             </div>
 
                         </div>
@@ -77,7 +83,8 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="exampleFormControlTextarea1">Description</label>
-                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1"
+                                    rows="3"></textarea>
                             </div>
 
                         </div>
@@ -102,8 +109,6 @@
     $(document).ready(function() {
         $('#brand').select2();
     });
-
 </script>
-
 
 @endpush

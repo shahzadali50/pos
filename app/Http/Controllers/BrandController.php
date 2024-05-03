@@ -73,6 +73,14 @@ class BrandController extends Controller
 
 
 }
+
+public function status(Request $request)
+    {
+        $member = Brand::find($request->member_id);
+        $member->status = $request->BrandStatus;
+        $member->save();
+    }
+
 }
 
 

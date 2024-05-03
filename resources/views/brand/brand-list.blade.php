@@ -31,7 +31,18 @@
                                     <tr>
                                         <th scope="row">{{$brand_list->id }}</th>
                                         <td>{{$brand_list->name}}</td>
-                                        <td>{{$brand_list->status}}</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input data-id="{{ $brand_list->id }}"  type="checkbox" class="toggle-class"
+                                                           data-onstyle="success"
+                                                           data-offstyle="dark" data-toggle="toggle" data-on="Active" data-off="InActive"
+                                                           {{ $brand_list->status ? 'checked' : '' }} data-size="sm">
+                                                </label>
+
+                                            </div>
+                                           </td>
+                                        {{-- <td>{{$brand_list->status}}</td> --}}
                                         <td>
                                             <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span class="text-muted sr-only">Action</span>
@@ -65,3 +76,26 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    $(document).ready(function() {
+        $('.toggle-class').change(function() {
+            var BrandStatus = $(this).prop('checked') ? 1 : 0;
+            var memberId = $(this).data('id');
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{{ route('brand.status') }}",
+                data: {'BrandStatus': BrandStatus, 'member_id': memberId},
+                success: function(data) {
+                    // console.log('Success');
+
+                }
+            });
+        });
+    });
+</script>
+
+@endpush

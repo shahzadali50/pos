@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-12">
                             <button type="reset" class="btn mb-2 btn-warning">Reset</button>
-                            <button type="submit" class="btn mb-2 btn-info">Add Catogory</button>
+                            <button type="submit" class="btn mb-2 btn-info">Add Brand</button>
                         </div>
                     </div>
                 </form>

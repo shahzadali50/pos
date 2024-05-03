@@ -27,6 +27,10 @@ Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('ca
 Route::put('/category/update/{id}', [CategoryController::class, 'CategoryUpdateForm'])->name('category.updateForm');
 Route::post('/category/updatedRecored/{id}', [CategoryController::class, 'CategoryUpdatedRecord'])->name('category.updatedRecord');
 
+Route::get('/category/status', [CategoryController::class, 'status'])->name('category.status');
+
+
+
 // Brand Routes⭐⭐
 Route::get('/brand', [BrandController::class, 'brand'])->name('brand');
 Route::post('/brand/insert', [BrandController::class, 'insert'])->name('brand.insert');
@@ -34,6 +38,7 @@ Route::get('/brand/list', [BrandController::class, 'list'])->name('brand.list');
 Route::delete('/brand-delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 Route::get('/brand/edit/{id}', [BrandController::class, 'BrandEdit'])->name('brand.edit');
 Route::post('/brand/update/{id}', [BrandController::class, 'BrandUpdate'])->name('brand.update');
+Route::get('/brand/status', [BrandController::class, 'status'])->name('brand.status');
 
 // Product Route ⭐⭐
 Route::get('/product', [ProductController::class, 'product'])->name('product.add');

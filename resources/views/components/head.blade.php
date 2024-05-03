@@ -29,6 +29,8 @@
         <script src="{{url('js/all.min.js')}}"></script>
         <link rel="stylesheet" href="{{url('assets/css/sweetalert2.min.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/dataTables.bootstrap4.css')}}">
+        {{-- Bootstrap Switch Button --}}
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
 
         <title>POS</title>

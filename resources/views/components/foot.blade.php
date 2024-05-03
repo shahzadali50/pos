@@ -14,6 +14,8 @@
 <script src="{{url('assets/js/datamaps.custom.js')}}"></script>
 <script src="{{url('assets/js/Chart.min.js')}}"></script>
 <script src="{{url('assets/js/jquery-ui.min.js')}}"></script>
+{{-- Bootstrap Switch Button --}}
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 <script>
     /* defind global options */

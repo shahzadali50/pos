@@ -72,7 +72,7 @@
                         <a class="nav-link pl-lg-2" href="{{ route('order.create') }}"><span
                                 class="ml-1">Create</span></a>
                         <a class="nav-link pl-lg-2" href="{{ route('order.list') }}"><span
-                                class="ml-1">Orders</span></a>
+                                class="ml-1">Order List</span></a>
                         <a class="nav-link pl-lg-2" href="{{ route('order.items') }}"><span class="ml-1">Order
                                 Items</span></a>
 
@@ -108,11 +108,11 @@
         <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted " type="search" placeholder="Type something..." aria-label="Search">
       </form> --}}
         <ul class="navbar-nav d-flex flex-row">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link text-muted my-2" href="./#" id="modeSwitcher" data-mode="light">
                     <i class="fe fe-sun fe-16"></i>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="nav-item">
           <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
             <i class="fe fe-grid fe-16"></i>
@@ -128,13 +128,13 @@
                 <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="avatar avatar-sm mt-2">
-                        <img src="{{ asset('assets/img/logo/user.png') }}" alt="not-show"
+                        <img style="width: 50px;" src="{{ asset('assets/img/logo/user.png') }}" alt="not-show"
                             class="avatar-img rounded-circle">
 
                     </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                   
+
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="{{route('logout')}}">Logout</a>
                     </li>

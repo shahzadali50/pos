@@ -10,6 +10,7 @@
                     <div class="col">
                         <span class="h2 mb-0">{{ $totalSale }}</span>
                         <span>(PKR)</span>
+
                         <p class="small text-muted mb-2 mt-1 text-uppercase">Total Sales</p>
                         <span class="badge badge-pill badge-success">+15.5%</span>
                     </div>
@@ -118,7 +119,7 @@
                         <span>(PKR)</span>
 
                         <p class="small text-muted mb-2 mt-1 text-uppercase">today sales</p>
-                        <span class="badge badge-pill badge-danger">+10.9%</span>
+                        <span class="badge badge-pill badge-success">+17.9%</span>
                     </div>
                     <div class="col-auto">
                         <span class="circle circle-lg bg-primary d-flex justify-content-center">

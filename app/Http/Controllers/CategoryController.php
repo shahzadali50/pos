@@ -67,6 +67,13 @@ class CategoryController extends Controller
             return redirect()->route('category');
         }
     }
+
+    public function status(Request $request)
+    {
+        $member = Category::find($request->member_id);
+        $member->status = $request->CategoryStatus;
+        $member->save();
+    }
 }
 
 
